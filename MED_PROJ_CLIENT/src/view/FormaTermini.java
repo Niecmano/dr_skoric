@@ -57,7 +57,7 @@ public class FormaTermini extends javax.swing.JFrame {
         btnObrisiZakazan = new javax.swing.JButton();
         btnIzvestaj = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));

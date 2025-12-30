@@ -101,4 +101,10 @@ public class Lekar extends OpstiDomenskiObjekat implements Serializable{
         }
         return lekari;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Lekar)) return false;
+        return ((Lekar) obj).getSifraLekara()==sifraLekara;
+    }
 }

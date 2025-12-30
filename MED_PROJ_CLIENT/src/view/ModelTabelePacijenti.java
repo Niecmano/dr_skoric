@@ -15,7 +15,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ModelTabelePacijenti extends AbstractTableModel {
     private List<Pacijent> pacijenti;
-    private String[] kols = {"sifra pacijenta","ime i prezime","datum rodjenja"};
+    private String[] kols = {"sifra pacijenta","ime i prezime","datum rodjenja","telefon"};
     public ModelTabelePacijenti(List<Pacijent> pacijenti) {
         this.pacijenti = pacijenti;
     }
@@ -40,6 +40,8 @@ public class ModelTabelePacijenti extends AbstractTableModel {
                 return p.getSifraPac();
             case 2:
                 return p.getDatumRodj().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+            case 3:
+                return p.getTelefon();
             default:
                 throw new AssertionError();
         }

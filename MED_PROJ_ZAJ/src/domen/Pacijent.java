@@ -20,6 +20,7 @@ public class Pacijent extends OpstiDomenskiObjekat implements Serializable{
     private int sifraPac;
     private String imePrez;
     private LocalDate datumRodj;
+    private String telefon;
 
     public Pacijent() {}
 
@@ -29,6 +30,13 @@ public class Pacijent extends OpstiDomenskiObjekat implements Serializable{
         this.datumRodj = datumRodj;
     }
 
+    public Pacijent(int sifraPac, String imePrez, LocalDate datumRodj, String telefon) {
+        this.sifraPac = sifraPac;
+        this.imePrez = imePrez;
+        this.datumRodj = datumRodj;
+        this.telefon = telefon;
+    }
+    
     public int getSifraPac() {
         return sifraPac;
     }
@@ -51,6 +59,14 @@ public class Pacijent extends OpstiDomenskiObjekat implements Serializable{
 
     public void setDatumRodj(LocalDate datumRodj) {
         this.datumRodj = datumRodj;
+    }
+
+    public String getTelefon() {
+        return telefon;
+    }
+
+    public void setTelefon(String telefon) {
+        this.telefon = telefon;
     }
 
     
@@ -81,7 +97,7 @@ public class Pacijent extends OpstiDomenskiObjekat implements Serializable{
 
     @Override
     public String vrednostiUbacivanje() {
-        return "0,'"+imePrez+"','"+java.sql.Date.valueOf(datumRodj)+"'";
+        return "0,'"+imePrez+"','"+java.sql.Date.valueOf(datumRodj)+"',"+telefon;
     }
 
     @Override
@@ -105,7 +121,7 @@ public class Pacijent extends OpstiDomenskiObjekat implements Serializable{
         try {
             while (rs.next()) {
                 lt.add(new Pacijent(rs.getInt("sifraPac"),rs.getString("imePrez"), 
-                rs.getDate("datumRodj").toLocalDate()));
+                rs.getDate("datumRodj").toLocalDate(),rs.getString("telefon")));
             }
         } catch (SQLException ex) {
             System.out.println(ex);

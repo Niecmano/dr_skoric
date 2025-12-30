@@ -86,7 +86,7 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
         cmbLekari1 = new javax.swing.JComboBox<>();
         panelPacijent = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1250, 681));
@@ -268,8 +268,6 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
     private javax.swing.JLabel lblLekar;
     private javax.swing.JLabel lblPac1;
     private javax.swing.JPanel panelPacijent;
-    private javax.swing.JPanel panelPacijent1;
-    private javax.swing.JPanel panelPacijent2;
     private javax.swing.JTextArea taAnamneza;
     private javax.swing.JTextArea taDijagnoza;
     private javax.swing.JTextArea taTerapija;

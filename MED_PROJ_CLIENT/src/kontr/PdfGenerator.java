@@ -42,11 +42,11 @@ public class PdfGenerator {
         try {
             PdfWriter.getInstance(document, new FileOutputStream(filePath));
             document.open();
-            Image img = Image.getInstance("C:\\Users\\Nemanja\\Desktop\\med.proj\\logo.png");
-            img.scaleToFit(270, 70);
-            img.setAlignment(Image.ALIGN_LEFT);
+//            Image img = Image.getInstance("C:\\Users\\Nemanja\\Desktop\\med.proj\\logo.png");
+//            img.scaleToFit(270, 70);
+//            img.setAlignment(Image.ALIGN_LEFT);
 
-            document.add(img); 
+//            document.add(img); 
             document.add(new Paragraph("\n\nIZVEŠTAJ LEKARA\n\n"));
             document.add(new Paragraph("Datum pregleda: "+i.getZt().getDatumVreme().toLocalDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))));
             document.add(new Paragraph("\nPacijent:"+i.getZt().getPac()+"\n"));

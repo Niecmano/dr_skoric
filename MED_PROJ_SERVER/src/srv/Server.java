@@ -5,6 +5,7 @@
 package srv;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -20,6 +21,7 @@ public class Server extends Thread{
     @Override
     public void run() {     
         try {
+//            srvskt = new ServerSocket(9009, 5, InetAddress.getByName("192.168.0.19"));
             srvskt = new ServerSocket(9009);
             while (radi) {
                 Socket skt = srvskt.accept();
