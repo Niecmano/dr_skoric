@@ -25,7 +25,8 @@ public class Kontroler {
     
     private Kontroler(){
         try {
-            skt = new Socket("localhost", 9009);
+//            skt = new Socket("localhost", 9009);
+            skt = new Socket("192.168.0.19", 9009);
             rcv = new Primalac(skt);
             sndr = new Posiljalac(skt);
         } catch (IOException ex) {

@@ -59,7 +59,8 @@ public class DostupanTermin extends OpstiDomenskiObjekat implements Serializable
 
     @Override
     public String joinDeo() {
-        return "JOIN lekar l ON dt.sifraLekara=l.sifraLekara JOIN specijalizacija sp ON l.sifraSpec=sp.sifraSpec";
+        return "JOIN lekar l ON dt.sifraLekara=l.sifraLekara LEFT JOIN specijalizacija sp ON l.sifraSpec = sp.sifraSpec\n" +
+"LEFT JOIN specijalizacija subsp ON l.sifraSubspec = subsp.sifraSpec";
     }
 
     @Override
@@ -94,7 +95,9 @@ public class DostupanTermin extends OpstiDomenskiObjekat implements Serializable
         List<OpstiDomenskiObjekat> termini = new LinkedList<>();
         try {
             while (rs.next()) {
-                Lekar le = new Lekar(rs.getInt("l.sifraLekara"), rs.getString("l.imePrez"), new Specijalizacija(rs.getInt("sp.sifraSpec"), rs.getString("sp.nazivSpec")));
+                Lekar le = new Lekar(rs.getInt("sifraLekara"), rs.getString("imePrez"), 
+                    new Specijalizacija(rs.getInt("sp.sifraSpec"), rs.getString("sp.nazivSpec")),
+                new Specijalizacija(rs.getInt("subsp.sifraSpec"), rs.getString("subsp.nazivSpec")));
                 termini.add(new DostupanTermin(rs.getTimestamp("datumVreme").toInstant().atZone(ZoneId.of("Europe/Belgrade")).toLocalDateTime(), le));
             }
         } catch (SQLException ex) {

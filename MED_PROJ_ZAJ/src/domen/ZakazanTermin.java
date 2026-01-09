@@ -66,7 +66,8 @@ public class ZakazanTermin extends OpstiDomenskiObjekat implements Serializable{
 
     @Override
     public String joinDeo() {
-        return "JOIN lekar l ON zt.sifraLekara=l.sifraLekara JOIN pacijent p ON zt.sifraPac=p.sifraPac JOIN specijalizacija sp ON l.sifraSpec=sp.sifraSpec";
+        return "JOIN lekar l ON zt.sifraLekara=l.sifraLekara LEFT JOIN specijalizacija sp ON l.sifraSpec = sp.sifraSpec\n" +
+"LEFT JOIN specijalizacija subsp ON l.sifraSubspec = subsp.sifraSpec JOIN pacijent p ON zt.sifraPac=p.sifraPac";
     }
 
     @Override
@@ -101,7 +102,9 @@ public class ZakazanTermin extends OpstiDomenskiObjekat implements Serializable{
         List<OpstiDomenskiObjekat> termini = new LinkedList<>();
         try {
             while (rs.next()) {
-                Lekar le = new Lekar(rs.getInt("l.sifraLekara"), rs.getString("l.imePrez"), new Specijalizacija(rs.getInt("sp.sifraSpec"), rs.getString("sp.nazivSpec")));
+                Lekar le = new Lekar(rs.getInt("sifraLekara"), rs.getString("imePrez"), 
+                    new Specijalizacija(rs.getInt("sp.sifraSpec"), rs.getString("sp.nazivSpec")),
+                new Specijalizacija(rs.getInt("subsp.sifraSpec"), rs.getString("subsp.nazivSpec")));
                 Pacijent pac = new Pacijent(rs.getInt("p.sifraPac"), rs.getString("p.imePrez"), null);
                 termini.add(new ZakazanTermin(pac,rs.getTimestamp("datumVreme").toInstant().atZone(ZoneId.of("Europe/Belgrade")).toLocalDateTime(), le));
             }

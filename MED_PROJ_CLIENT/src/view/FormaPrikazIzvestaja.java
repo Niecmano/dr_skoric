@@ -112,7 +112,9 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
 
         taDijagnoza.setColumns(20);
         taDijagnoza.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        taDijagnoza.setLineWrap(true);
         taDijagnoza.setRows(5);
+        taDijagnoza.setWrapStyleWord(true);
         jScrollPane2.setViewportView(taDijagnoza);
 
         lblDatum2.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
@@ -123,7 +125,9 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
 
         taTerapija.setColumns(20);
         taTerapija.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        taTerapija.setLineWrap(true);
         taTerapija.setRows(5);
+        taTerapija.setWrapStyleWord(true);
         jScrollPane3.setViewportView(taTerapija);
 
         btnDodaj.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
@@ -135,6 +139,11 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
         });
 
         cmbLekari1.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        cmbLekari1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbLekari1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelPacijentLayout = new javax.swing.GroupLayout(panelPacijent);
         panelPacijent.setLayout(panelPacijentLayout);
@@ -251,6 +260,10 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
         PdfGenerator.exportIzvestaj(i);
         this.dispose();
     }//GEN-LAST:event_btnDodajActionPerformed
+
+    private void cmbLekari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLekari1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbLekari1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

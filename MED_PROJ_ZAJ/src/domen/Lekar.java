@@ -18,13 +18,15 @@ public class Lekar extends OpstiDomenskiObjekat implements Serializable{
     private int sifraLekara;
     private String imePrez;
     private Specijalizacija spec;
+    private Specijalizacija subspec;
 
     public Lekar() {}
 
-    public Lekar(int sifraLekara, String imePrez, Specijalizacija spec) {
+    public Lekar(int sifraLekara, String imePrez, Specijalizacija spec, Specijalizacija subspec) {
         this.sifraLekara = sifraLekara;
         this.imePrez = imePrez;
         this.spec = spec;
+        this.subspec = subspec;
     }
 
     public int getSifraLekara() { return sifraLekara; }
@@ -41,11 +43,24 @@ public class Lekar extends OpstiDomenskiObjekat implements Serializable{
         this.spec = spec;
     }
 
+    public Specijalizacija getSubspec() {
+        return subspec;
+    }
 
+    public void setSubspec(Specijalizacija subspec) {
+        this.subspec = subspec;
+    }
+
+    
 
     @Override
     public String toString() {
-        return imePrez;
+        String[] reci = imePrez.split(" ");
+        String lekar="";
+        for (String w : reci) {
+            if(!w.toLowerCase().equals(w) || w.equals("dr")) lekar+=w+" ";
+        }
+        return lekar;
     }
 
     @Override
@@ -60,7 +75,8 @@ public class Lekar extends OpstiDomenskiObjekat implements Serializable{
 
     @Override
     public String joinDeo() {
-        return "JOIN specijalizacija sp ON l.sifraSpec=sp.sifraSpec";
+        return "LEFT JOIN specijalizacija sp ON l.sifraSpec = sp.sifraSpec\n" +
+"LEFT JOIN specijalizacija subsp ON l.sifraSubspec = subsp.sifraSpec";
     }
 
     @Override
@@ -94,7 +110,8 @@ public class Lekar extends OpstiDomenskiObjekat implements Serializable{
         try {
             while (rs.next()) {
                 lekari.add(new Lekar(rs.getInt("sifraLekara"), rs.getString("imePrez"), 
-                    new Specijalizacija(rs.getInt("sp.sifraSpec"), rs.getString("sp.nazivSpec"))));
+                    new Specijalizacija(rs.getInt("sp.sifraSpec"), rs.getString("sp.nazivSpec")),
+                new Specijalizacija(rs.getInt("subsp.sifraSpec"), rs.getString("subsp.nazivSpec"))));
             }
         } catch (SQLException ex) {
             System.out.println(ex);

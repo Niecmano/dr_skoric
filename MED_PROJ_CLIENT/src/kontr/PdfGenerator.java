@@ -55,8 +55,10 @@ public class PdfGenerator {
             document.add(new Paragraph("Dijagnoza:\n" + i.getDg() + "\n\n"));
             document.add(new Paragraph("Terapija:\n" + i.getTerapija() + "\n\n"));
             
-             document.add(new Paragraph("\n\n\ndr "+i.getZt().getLekar()));
+            document.add(new Paragraph("\n\n\n"+i.getZt().getLekar().getImePrez()));
             document.add(new Paragraph("Specijalizacija lekara: "+i.getZt().getLekar().getSpec().getNazivSpec()));
+            if(i.getZt().getLekar().getSubspec() != null) 
+                document.add(new Paragraph("Subspecijalizacija lekara: "+i.getZt().getLekar().getSubspec().getNazivSpec()));
 
         } catch (DocumentException | IOException e) {
             e.printStackTrace();

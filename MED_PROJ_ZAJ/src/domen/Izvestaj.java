@@ -78,7 +78,8 @@ public class Izvestaj extends OpstiDomenskiObjekat {
      + "JOIN lekar l ON i.sifraLekara = l.sifraLekara "
      + "JOIN zakazantermin zt ON i.sifraPac = zt.sifraPac "
      + "AND i.datumVreme = zt.datumVreme "
-     + "AND i.sifraLekara = zt.sifraLekara JOIN specijalizacija sp ON l.sifraSpec=sp.sifraSpec";
+     + "AND i.sifraLekara = zt.sifraLekara LEFT JOIN specijalizacija sp ON l.sifraSpec = sp.sifraSpec\n" +
+"LEFT JOIN specijalizacija subsp ON l.sifraSubspec = subsp.sifraSpec";
     }
 
     @Override
@@ -88,7 +89,8 @@ public class Izvestaj extends OpstiDomenskiObjekat {
 
     @Override
     public String vrednostiUbacivanje() {
-        return zt.getPac().getSifraPac()+",'" + zt.getDatumVreme() + "'," + zt.getLekar().getSifraLekara()+",'"+anamneza+"','"+dg+"','"+terapija+"'";
+        return zt.getPac().getSifraPac()+",'" + zt.getDatumVreme() + "'," 
+                + zt.getLekar().getSifraLekara()+",'"+anamneza+"','"+dg+"','"+terapija+"'";
     }
 
     @Override
@@ -111,7 +113,9 @@ public class Izvestaj extends OpstiDomenskiObjekat {
         List<OpstiDomenskiObjekat> izvs = new LinkedList<>();
         try {
             while (rs.next()) {
-                Lekar le = new Lekar(rs.getInt("l.sifraLekara"), rs.getString("l.imePrez"), new Specijalizacija(rs.getInt("sp.sifraSpec"), rs.getString("sp.nazivSpec")));
+                Lekar le = new Lekar(rs.getInt("sifraLekara"), rs.getString("l.imePrez"), 
+                    new Specijalizacija(rs.getInt("sp.sifraSpec"), rs.getString("sp.nazivSpec")),
+                new Specijalizacija(rs.getInt("subsp.sifraSpec"), rs.getString("subsp.nazivSpec")));
                 Pacijent pac = new Pacijent(rs.getInt("p.sifraPac"), rs.getString("p.imePrez"), rs.getDate("datumRodj").toLocalDate());
                 ZakazanTermin zt = new ZakazanTermin(pac,rs.getTimestamp("zt.datumVreme").toInstant().atZone(ZoneId.of("Europe/Belgrade")).toLocalDateTime(), le);
                 Izvestaj i = new Izvestaj(zt, rs.getString("anamneza"),rs.getString("dg"),rs.getString("terapija"));
