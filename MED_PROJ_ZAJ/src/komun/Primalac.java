@@ -8,24 +8,25 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 
-/**
- *
- * @author Nemanja
- */
 public class Primalac {
-    private Socket skt;
+    private ObjectInputStream in;
 
     public Primalac(Socket skt) {
-        this.skt = skt;
-    }
-    
-    public Object primi() {
         try {
-            ObjectInputStream ois = new ObjectInputStream(skt.getInputStream());
-            return ois.readObject();
-        } catch (IOException | ClassNotFoundException ex) {
+            in = new ObjectInputStream(skt.getInputStream());
+        } catch (IOException ex) {
             System.out.println(ex);
-        } 
+        }
+    }
+
+    public synchronized Object primi() {
+        try {
+            return in.readObject();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+        }
         return null;
     }
 }

@@ -21,8 +21,8 @@ public class Server extends Thread{
     @Override
     public void run() {     
         try {
-            srvskt = new ServerSocket(9009, 5, InetAddress.getByName("192.168.0.19"));
-//            srvskt = new ServerSocket(9009);
+//            srvskt = new ServerSocket(9009, 5, InetAddress.getByName("192.168.0.19"));
+            srvskt = new ServerSocket(9009);
             while (radi) {
                 Socket skt = srvskt.accept();
                 KlijentskaNit kn = new KlijentskaNit(skt);

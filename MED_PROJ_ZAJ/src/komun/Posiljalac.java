@@ -8,22 +8,22 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-/**
- *
- * @author Nemanja
- */
 public class Posiljalac {
-    
-    private Socket skt;
+    private ObjectOutputStream out;
 
     public Posiljalac(Socket skt) {
-        this.skt = skt;
-    }
-    
-    public void salji(Object obj){
         try {
-            ObjectOutputStream out = new ObjectOutputStream(skt.getOutputStream());
+            out = new ObjectOutputStream(skt.getOutputStream());
+            out.flush();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public synchronized void salji(Object obj) {
+        try {
             out.writeObject(obj);
+            out.flush();
         } catch (IOException ex) {
             System.out.println(ex);
         }

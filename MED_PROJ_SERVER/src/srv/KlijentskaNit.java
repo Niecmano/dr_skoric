@@ -27,8 +27,8 @@ public class KlijentskaNit extends Thread {
     @Override
     public void run() {
         try {
-            Primalac rcv = new Primalac(skt);
             Posiljalac sndr = new Posiljalac(skt);
+            Primalac rcv = new Primalac(skt);
             dbb = DBBroker.getInstance();
             while (true) {
                 Zahtev req = (Zahtev) rcv.primi(); Odgovor o;
@@ -101,7 +101,7 @@ public class KlijentskaNit extends Thread {
                 }
                 sndr.salji(o);
             }
-        } catch (NullPointerException ex) {
+        } catch (Exception ex) {
             System.out.println("Kraj rada");
         }
     }
