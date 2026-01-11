@@ -146,7 +146,7 @@ public class FormaIzvestaji extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbLekari1, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cmbLekari1, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(44, 44, 44)
@@ -210,9 +210,11 @@ public class FormaIzvestaji extends javax.swing.JFrame {
 
     private void btnPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziActionPerformed
         Pacijent pac = tfPacijent.getSelectedPacijent();
-        ZakazanTermin zt = new ZakazanTermin(pac, LocalDateTime.now(), (Lekar) cmbLekari1.getSelectedItem());
-        mti = new ModelTabeleIzvestaji(Kontroler.getInstance().filtrirajIzvestaje(zt));
-        tblZakazani.setModel(mti);
+        if(pac!=null){
+            ZakazanTermin zt = new ZakazanTermin(pac, LocalDateTime.now(), (Lekar) cmbLekari1.getSelectedItem());
+            mti = new ModelTabeleIzvestaji(Kontroler.getInstance().filtrirajIzvestaje(zt));
+            tblZakazani.setModel(mti);
+        }
     }//GEN-LAST:event_btnPretraziActionPerformed
 
     private void btnPrikazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikazActionPerformed
