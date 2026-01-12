@@ -152,7 +152,12 @@ public class Kontroler {
         return null; 
     }
 
-
+    public List<Pacijent> filtrirajPacijente(Pacijent pac) {
+        Zahtev req = new Zahtev(Operacija.FILTER_PACIJENATA, pac);
+        sndr.salji(req);
+        Odgovor o = (Odgovor) rcv.primi();
+        return (List<Pacijent>) o.getOdg();
+    }
 }
 
 //    public Exception izmeniKlub(PlivackiKlub p) {

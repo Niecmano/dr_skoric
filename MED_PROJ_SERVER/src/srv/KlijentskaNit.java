@@ -96,6 +96,10 @@ public class KlijentskaNit extends Thread {
                         dbb.insert((Izvestaj)req.getArgum());
                         o=new Odgovor(null, null);
                         break;  
+                    case FILTER_PACIJENATA:
+                        Pacijent pa = (Pacijent) req.getArgum();
+                        o = new Odgovor(dbb.select(pa, true),null);
+                        break;
                     default:
                         throw new RuntimeException("Operacija ne postoji");
                 }

@@ -112,7 +112,7 @@ public class Pacijent extends OpstiDomenskiObjekat implements Serializable{
 
     @Override
     public String filter() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "WHERE sifraPac="+sifraPac;
     }
 
     @Override
