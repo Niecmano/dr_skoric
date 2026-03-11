@@ -17,17 +17,21 @@ import java.util.List;
 public class Izvestaj extends OpstiDomenskiObjekat {
     private ZakazanTermin zt;
     private String anamneza;
+    private String nalaz;
     private String dg;
     private String terapija;
+    private String kontrola;
 
     public Izvestaj() {
     }
     
-    public Izvestaj(ZakazanTermin zt, String anamneza, String dg, String terapija) {
+    public Izvestaj(ZakazanTermin zt, String anamneza, String dg, String terapija, String nalaz, String kontrola) {
         this.zt = zt;
         this.anamneza = anamneza;
         this.dg = dg;
         this.terapija = terapija;
+        this.kontrola = kontrola;
+        this.nalaz = nalaz;
     }
 
     public ZakazanTermin getZt() {
@@ -61,6 +65,22 @@ public class Izvestaj extends OpstiDomenskiObjekat {
     public void setTerapija(String terapija) {
         this.terapija = terapija;
     }
+
+    public String getNalaz() {
+        return nalaz;
+    }
+
+    public void setNalaz(String nalaz) {
+        this.nalaz = nalaz;
+    }
+
+    public String getKontrola() {
+        return kontrola;
+    }
+
+    public void setKontrola(String kontrola) {
+        this.kontrola = kontrola;
+    }
     
     @Override
     public String nazivTabele() {
@@ -90,7 +110,7 @@ public class Izvestaj extends OpstiDomenskiObjekat {
     @Override
     public String vrednostiUbacivanje() {
         return zt.getPac().getSifraPac()+",'" + zt.getDatumVreme() + "'," 
-                + zt.getLekar().getSifraLekara()+",'"+anamneza+"','"+dg+"','"+terapija+"'";
+                + zt.getLekar().getSifraLekara()+",'"+anamneza+"','"+dg+"','"+terapija+"','"+nalaz+"','"+kontrola+"'";
     }
 
     @Override
@@ -105,6 +125,8 @@ public class Izvestaj extends OpstiDomenskiObjekat {
 
     @Override
     public String filter() {
+        if(zt.getLekar().getImePrez()==null) return "WHERE i.sifraPac="+zt.getPac().getSifraPac();
+        if(zt.getPac().getImePrez()==null) return "WHERE i.sifraPac="+zt.getPac().getSifraPac();   
         return "WHERE i.sifraPac="+zt.getPac().getSifraPac()+" AND i.sifraLekara="+zt.getLekar().getSifraLekara();
     }
 
@@ -118,7 +140,8 @@ public class Izvestaj extends OpstiDomenskiObjekat {
                 new Specijalizacija(rs.getInt("subsp.sifraSpec"), rs.getString("subsp.nazivSpec")));
                 Pacijent pac = new Pacijent(rs.getInt("p.sifraPac"), rs.getString("p.imePrez"), rs.getDate("datumRodj").toLocalDate());
                 ZakazanTermin zt = new ZakazanTermin(pac,rs.getTimestamp("zt.datumVreme").toInstant().atZone(ZoneId.of("Europe/Belgrade")).toLocalDateTime(), le);
-                Izvestaj i = new Izvestaj(zt, rs.getString("anamneza"),rs.getString("dg"),rs.getString("terapija"));
+                Izvestaj i = new Izvestaj(zt, rs.getString("anamneza"),rs.getString("dg"),rs.getString("terapija"),
+                rs.getString("nalaz"),rs.getString("kontrola"));
                 izvs.add(i);
             }
         } catch (SQLException ex) {

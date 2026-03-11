@@ -275,7 +275,7 @@ public class FormaTermini extends javax.swing.JFrame {
 
     private void btnIzvestajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzvestajActionPerformed
         ZakazanTermin zt = mtz.getTermin(tblZakazani.getSelectedRow());
-        Izvestaj i = new Izvestaj(zt, null,null,null);
+        Izvestaj i = new Izvestaj(zt, null,null,null,null,null);
         FormaPrikazIzvestaja fpi = new FormaPrikazIzvestaja(i);
         fpi.setVisible(true);
     }//GEN-LAST:event_btnIzvestajActionPerformed

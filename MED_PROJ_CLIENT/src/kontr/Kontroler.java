@@ -10,7 +10,6 @@ import java.util.List;
 import domen.*;
 import java.time.LocalDate;
 import komun.*;
-import view.ModelTabeleIzvestaji;
 
 /**
  *
@@ -25,8 +24,8 @@ public class Kontroler {
     
     private Kontroler(){
         try {
-//            skt = new Socket("localhost", 9009);
-            skt = new Socket("192.168.0.19", 9009);
+            skt = new Socket("localhost", 9009);
+//            skt = new Socket("192.168.0.19", 9009);
             sndr = new Posiljalac(skt);
             rcv = new Primalac(skt);
         } catch (IOException ex) {

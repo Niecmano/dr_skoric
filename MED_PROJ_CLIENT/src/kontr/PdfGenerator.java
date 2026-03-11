@@ -42,9 +42,9 @@ public class PdfGenerator {
         try {
             PdfWriter.getInstance(document, new FileOutputStream(filePath));
             document.open();
-//            Image img = Image.getInstance("C:\\Users\\Nemanja\\Desktop\\med.proj\\logo.png");
-//            img.scaleToFit(270, 70);
-//            img.setAlignment(Image.ALIGN_LEFT);
+            Image img = Image.getInstance(PdfGenerator.class.getResource("/slike/logo.png"));
+            img.scaleToFit(270, 70);
+            img.setAlignment(Image.ALIGN_LEFT);
 
 //            document.add(img); 
             document.add(new Paragraph("\n\nIZVEŠTAJ LEKARA\n\n"));
@@ -52,16 +52,21 @@ public class PdfGenerator {
             document.add(new Paragraph("\nPacijent:"+i.getZt().getPac()+"\n"));
 //            document.add(new Paragraph("Datum rodjenja pacijenta:"+i.getZt().getPac().getDatumRodj().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))))
             document.add(new Paragraph("\n\nAnamneza:\n" + i.getAnamneza() + "\n\n"));
+            document.add(new Paragraph("Klinički nalaz:\n" + i.getNalaz()+ "\n\n"));
             document.add(new Paragraph("Dijagnoza:\n" + i.getDg() + "\n\n"));
             document.add(new Paragraph("Terapija:\n" + i.getTerapija() + "\n\n"));
+            document.add(new Paragraph("Kontrola:\n" + i.getKontrola()+ "\n\n"));
             
             document.add(new Paragraph("\n\n\n"+i.getZt().getLekar().getImePrez()));
             document.add(new Paragraph("Specijalizacija lekara: "+i.getZt().getLekar().getSpec().getNazivSpec()));
-            if(i.getZt().getLekar().getSubspec() != null) 
+            System.out.println(i.getZt().getLekar().getSubspec());
+            
+            if(i.getZt().getLekar().getSubspec().getNazivSpec() != null) {
                 document.add(new Paragraph("Subspecijalizacija lekara: "+i.getZt().getLekar().getSubspec().getNazivSpec()));
+            }
 
         } catch (DocumentException | IOException e) {
-            e.printStackTrace();
+            System.out.println(e);
         } finally {
             document.close();
         }
