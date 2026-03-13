@@ -44,26 +44,31 @@ public class PdfGenerator {
             document.open();
             Image img = Image.getInstance(PdfGenerator.class.getResource("/slike/logo.png"));
             img.scaleToFit(270, 70);
-            img.setAlignment(Image.ALIGN_LEFT);
+            img.setAlignment(Image.ALIGN_CENTER);
 
-//            document.add(img); 
-            document.add(new Paragraph("\n\nIZVEŠTAJ LEKARA\n\n"));
-            document.add(new Paragraph("Datum pregleda: "+i.getZt().getDatumVreme().toLocalDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))));
-            document.add(new Paragraph("\nPacijent:"+i.getZt().getPac()+"\n"));
+            document.add(img); 
+            //document.add(new Paragraph("\nIZVEŠTAJ LEKARA\n\n"));
+            document.add(new Paragraph("\nDatum pregleda: "+i.getZt().getDatumVreme().toLocalDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))));
+            document.add(new Paragraph("Pacijent:"+i.getZt().getPac().getImePrez()+"\n"));
 //            document.add(new Paragraph("Datum rodjenja pacijenta:"+i.getZt().getPac().getDatumRodj().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))))
-            document.add(new Paragraph("\n\nAnamneza:\n" + i.getAnamneza() + "\n\n"));
+            document.add(new Paragraph("\nAnamneza:\n" + i.getAnamneza() + "\n\n"));
             document.add(new Paragraph("Klinički nalaz:\n" + i.getNalaz()+ "\n\n"));
             document.add(new Paragraph("Dijagnoza:\n" + i.getDg() + "\n\n"));
             document.add(new Paragraph("Terapija:\n" + i.getTerapija() + "\n\n"));
-            document.add(new Paragraph("Kontrola:\n" + i.getKontrola()+ "\n\n"));
+            document.add(new Paragraph("Kontrola:\n" + i.getKontrola()+ "\n"));
             
-            document.add(new Paragraph("\n\n\n"+i.getZt().getLekar().getImePrez()));
+            document.add(new Paragraph("\n"+i.getZt().getLekar().getImePrez()));
             document.add(new Paragraph("Specijalizacija lekara: "+i.getZt().getLekar().getSpec().getNazivSpec()));
             System.out.println(i.getZt().getLekar().getSubspec());
             
             if(i.getZt().getLekar().getSubspec().getNazivSpec() != null) {
-                document.add(new Paragraph("Subspecijalizacija lekara: "+i.getZt().getLekar().getSubspec().getNazivSpec()));
+                document.add(new Paragraph("Subspecijalizacija lekara: "+i.getZt().getLekar().getSubspec().getNazivSpec()+"\n\n"));
             }
+            
+            Image fut = Image.getInstance(PdfGenerator.class.getResource("/slike/footer.png"));
+            fut.setAlignment(Image.ALIGN_CENTER);
+            fut.scaleToFit(580, 110);
+            document.add(fut); 
 
         } catch (DocumentException | IOException e) {
             System.out.println(e);
