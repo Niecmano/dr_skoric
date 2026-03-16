@@ -81,7 +81,12 @@ public class Lekar extends OpstiDomenskiObjekat implements Serializable{
 
     @Override
     public String uslov() {
-        return "";
+        return "ORDER BY TRIM(\n" +
+"    CONCAT(\n" +
+"        SUBSTRING_INDEX(SUBSTRING_INDEX(l.imePrez, ' ', -2), ' ', 1), ' ',\n" +
+"        SUBSTRING_INDEX(l.imePrez, ' ', -1)\n" +
+"    )\n" +
+")";
     }
 
     @Override

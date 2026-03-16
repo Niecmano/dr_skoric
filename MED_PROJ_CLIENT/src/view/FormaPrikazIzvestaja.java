@@ -148,7 +148,7 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
         jScrollPane3.setViewportView(taTerapija);
 
         btnDodaj.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
-        btnDodaj.setText("Dodaj izvestaj");
+        btnDodaj.setText("Štampaj izveštaj");
         btnDodaj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDodajActionPerformed(evt);
