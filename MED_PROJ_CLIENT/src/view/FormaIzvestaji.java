@@ -27,7 +27,7 @@ public class FormaIzvestaji extends javax.swing.JFrame {
     public FormaIzvestaji() {
         initComponents();
         mti = new ModelTabeleIzvestaji(Kontroler.getInstance().vratiIzvestaje());
-        tblZakazani.setModel(mti);
+        tbIzvestaji.setModel(mti);
         popuniComboLekari();
         tfPacijent = new AutocompleteTextField(Kontroler.getInstance().vratiPacijente(), 20);
         tfPacijent.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -49,7 +49,7 @@ public class FormaIzvestaji extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblZakazani = new javax.swing.JTable();
+        tbIzvestaji = new javax.swing.JTable();
         btnPretrazi = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         cmbLekari1 = new javax.swing.JComboBox<>();
@@ -66,8 +66,8 @@ public class FormaIzvestaji extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 30)); // NOI18N
         jLabel2.setText("Izveštaji lekara");
 
-        tblZakazani.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
-        tblZakazani.setModel(new javax.swing.table.DefaultTableModel(
+        tbIzvestaji.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
+        tbIzvestaji.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -78,8 +78,8 @@ public class FormaIzvestaji extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblZakazani.setRowHeight(26);
-        jScrollPane1.setViewportView(tblZakazani);
+        tbIzvestaji.setRowHeight(26);
+        jScrollPane1.setViewportView(tbIzvestaji);
 
         btnPretrazi.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
         btnPretrazi.setText("Pretraži izveštaj");
@@ -215,18 +215,18 @@ public class FormaIzvestaji extends javax.swing.JFrame {
         if(pac!=null){
             ZakazanTermin zt = new ZakazanTermin(pac, LocalDateTime.now(), (Lekar) cmbLekari1.getSelectedItem());
             mti = new ModelTabeleIzvestaji(Kontroler.getInstance().filtrirajIzvestaje(zt));
-            tblZakazani.setModel(mti);
+            tbIzvestaji.setModel(mti);
         }
     }//GEN-LAST:event_btnPretraziActionPerformed
 
     private void btnPrikazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikazActionPerformed
-        Izvestaj i = mti.getIzvestaj(tblZakazani.getSelectedRow());
+        Izvestaj i = mti.getIzvestaj(tbIzvestaji.getSelectedRow());
         FormaPrikazIzvestaja fji = new FormaPrikazIzvestaja(i);
         fji.setVisible(true);
     }//GEN-LAST:event_btnPrikazActionPerformed
 
     private void btnPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFActionPerformed
-        Izvestaj i = mti.getIzvestaj(tblZakazani.getSelectedRow());
+        Izvestaj i = mti.getIzvestaj(tbIzvestaji.getSelectedRow());
         PdfGenerator.exportIzvestaj(i);
     }//GEN-LAST:event_btnPDFActionPerformed
 
@@ -282,7 +282,7 @@ public class FormaIzvestaji extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelPacijent;
-    private javax.swing.JTable tblZakazani;
+    private javax.swing.JTable tbIzvestaji;
     // End of variables declaration//GEN-END:variables
         private void popuniComboLekari() {
         List<Lekar> ls = Kontroler.getInstance().vratiLekare();

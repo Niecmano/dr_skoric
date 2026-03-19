@@ -137,7 +137,7 @@ public class Kontroler {
         Zahtev req = new Zahtev(Operacija.VRATI_IZVESTAJE, null);
         sndr.salji(req);
         Odgovor o = (Odgovor) rcv.primi();
-        System.out.println(((List<Izvestaj>) o.getOdg()).get(0).getZt().getDatumVreme());
+        System.out.println(((List<Izvestaj>) o.getOdg()).get(0).getDatumVreme());
         return (List<Izvestaj>) o.getOdg();
     }
 

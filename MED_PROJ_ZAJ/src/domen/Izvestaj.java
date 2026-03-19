@@ -6,6 +6,7 @@ package domen;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,7 +16,9 @@ import java.util.List;
  * @author Nemanja
  */
 public class Izvestaj extends OpstiDomenskiObjekat {
-    private ZakazanTermin zt;
+    private Pacijent pac;
+    private Lekar lekar;
+    private LocalDateTime datumVreme;
     private String anamneza;
     private String nalaz;
     private String dg;
@@ -25,8 +28,10 @@ public class Izvestaj extends OpstiDomenskiObjekat {
     public Izvestaj() {
     }
     
-    public Izvestaj(ZakazanTermin zt, String anamneza, String dg, String terapija, String nalaz, String kontrola) {
-        this.zt = zt;
+    public Izvestaj(Pacijent pac, Lekar lekar, LocalDateTime datumVreme, String anamneza, String dg, String terapija, String nalaz, String kontrola) {
+        this.pac = pac;
+        this.lekar = lekar;
+        this.datumVreme = datumVreme;
         this.anamneza = anamneza;
         this.dg = dg;
         this.terapija = terapija;
@@ -34,13 +39,30 @@ public class Izvestaj extends OpstiDomenskiObjekat {
         this.nalaz = nalaz;
     }
 
-    public ZakazanTermin getZt() {
-        return zt;
+    public Pacijent getPac() {
+        return pac;
     }
 
-    public void setZt(ZakazanTermin zt) {
-        this.zt = zt;
+    public void setPac(Pacijent pac) {
+        this.pac = pac;
     }
+
+    public Lekar getLekar() {
+        return lekar;
+    }
+
+    public void setLekar(Lekar lekar) {
+        this.lekar = lekar;
+    }
+
+    public LocalDateTime getDatumVreme() {
+        return datumVreme;
+    }
+
+    public void setDatumVreme(LocalDateTime datumVreme) {
+        this.datumVreme = datumVreme;
+    }
+
 
     public String getAnamneza() {
         return anamneza;
@@ -96,9 +118,7 @@ public class Izvestaj extends OpstiDomenskiObjekat {
     public String joinDeo() {
         return "JOIN pacijent p ON i.sifraPac = p.sifraPac "
      + "JOIN lekar l ON i.sifraLekara = l.sifraLekara "
-     + "JOIN zakazantermin zt ON i.sifraPac = zt.sifraPac "
-     + "AND i.datumVreme = zt.datumVreme "
-     + "AND i.sifraLekara = zt.sifraLekara LEFT JOIN specijalizacija sp ON l.sifraSpec = sp.sifraSpec\n" +
+     + "LEFT JOIN specijalizacija sp ON l.sifraSpec = sp.sifraSpec\n" +
 "LEFT JOIN specijalizacija subsp ON l.sifraSubspec = subsp.sifraSpec";
     }
 
@@ -109,8 +129,8 @@ public class Izvestaj extends OpstiDomenskiObjekat {
 
     @Override
     public String vrednostiUbacivanje() {
-        return zt.getPac().getSifraPac()+",'" + zt.getDatumVreme() + "'," 
-                + zt.getLekar().getSifraLekara()+",'"+anamneza+"','"+dg+"','"+terapija+"','"+nalaz+"','"+kontrola+"'";
+        return pac.getSifraPac()+",'" + datumVreme + "'," 
+                + lekar.getSifraLekara()+",'"+anamneza+"','"+dg+"','"+terapija+"','"+nalaz+"','"+kontrola+"'";
     }
 
     @Override
@@ -125,9 +145,9 @@ public class Izvestaj extends OpstiDomenskiObjekat {
 
     @Override
     public String filter() {
-        if(zt.getLekar().getImePrez()==null) return "WHERE i.sifraPac="+zt.getPac().getSifraPac();
-        if(zt.getPac().getImePrez()==null) return "WHERE i.sifraPac="+zt.getPac().getSifraPac();   
-        return "WHERE i.sifraPac="+zt.getPac().getSifraPac()+" AND i.sifraLekara="+zt.getLekar().getSifraLekara();
+        if(pac.getImePrez()==null) return "WHERE i.sifraPac="+pac.getSifraPac();
+        if(lekar.getImePrez()==null) return "WHERE i.sifraLekara="+lekar.getSifraLekara();   
+        return "WHERE i.sifraPac="+pac.getSifraPac()+" AND i.sifraLekara="+lekar.getSifraLekara();
     }
 
     @Override
@@ -138,10 +158,9 @@ public class Izvestaj extends OpstiDomenskiObjekat {
                 Lekar le = new Lekar(rs.getInt("sifraLekara"), rs.getString("l.imePrez"), 
                     new Specijalizacija(rs.getInt("sp.sifraSpec"), rs.getString("sp.nazivSpec")),
                 new Specijalizacija(rs.getInt("subsp.sifraSpec"), rs.getString("subsp.nazivSpec")));
-                Pacijent pac = new Pacijent(rs.getInt("p.sifraPac"), rs.getString("p.imePrez"), rs.getDate("datumRodj").toLocalDate());
-                ZakazanTermin zt = new ZakazanTermin(pac,rs.getTimestamp("zt.datumVreme").toInstant().atZone(ZoneId.of("Europe/Belgrade")).toLocalDateTime(), le);
-                Izvestaj i = new Izvestaj(zt, rs.getString("anamneza"),rs.getString("dg"),rs.getString("terapija"),
-                rs.getString("nalaz"),rs.getString("kontrola"));
+                Pacijent p = new Pacijent(rs.getInt("p.sifraPac"), rs.getString("p.imePrez"), rs.getDate("datumRodj").toLocalDate());
+                Izvestaj i = new Izvestaj(p, le, rs.getTimestamp("datumVreme").toInstant().atZone(ZoneId.of("Europe/Belgrade")).toLocalDateTime(),
+                        rs.getString("anamneza"),rs.getString("dg"),rs.getString("terapija"),rs.getString("nalaz"),rs.getString("kontrola"));
                 izvs.add(i);
             }
         } catch (SQLException ex) {

@@ -38,9 +38,9 @@ public class PdfGenerator {
             document.add(new Paragraph("\n\n\nIZVEŠTAJ LEKARA"));
 
             document.add(new Paragraph("\nDatum pregleda: "
-                    + i.getZt().getDatumVreme().toLocalDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")), font10));
+                    + i.getDatumVreme().toLocalDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")), font10));
 
-            document.add(new Paragraph("Pacijent: " + i.getZt().getPac().getImePrez() + "\n", font10));
+            document.add(new Paragraph("Pacijent: " + i.getPac().getImePrez() + "\n", font10));
 
             document.add(new Paragraph("\nAnamneza:\n" + i.getAnamneza() + "\n\n", font10));
             document.add(new Paragraph("Klinički nalaz:\n" + i.getNalaz() + "\n\n", font10));
@@ -48,12 +48,12 @@ public class PdfGenerator {
             document.add(new Paragraph("Terapija:\n" + i.getTerapija() + "\n\n", font10));
             document.add(new Paragraph("Kontrola:\n" + i.getKontrola() + "\n", font10));
 
-            document.add(new Paragraph("\n" + i.getZt().getLekar().getImePrez()));
-            document.add(new Paragraph("Specijalizacija lekara: " + i.getZt().getLekar().getSpec().getNazivSpec(), font10));
+            document.add(new Paragraph("\n" + i.getLekar().getImePrez()));
+            document.add(new Paragraph("Specijalizacija lekara: " + i.getLekar().getSpec().getNazivSpec(), font10));
 
-            if (i.getZt().getLekar().getSubspec().getNazivSpec() != null) {
+            if (i.getLekar().getSubspec().getNazivSpec() != null) {
                 document.add(new Paragraph("Subspecijalizacija lekara: "
-                        + i.getZt().getLekar().getSubspec().getNazivSpec() + "\n\n", font10));
+                        + i.getLekar().getSubspec().getNazivSpec() + "\n\n", font10));
             }
             document.close();
 

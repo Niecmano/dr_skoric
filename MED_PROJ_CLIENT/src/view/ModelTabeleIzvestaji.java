@@ -36,14 +36,14 @@ public class ModelTabeleIzvestaji extends AbstractTableModel{
         Izvestaj dt = izvestaji.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return dt.getZt().getLekar();
+                return dt.getLekar();
             case 1:
                 DateTimeFormatter f = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                return dt.getZt().getDatumVreme().toLocalDate().format(f);
+                return dt.getDatumVreme().toLocalDate().format(f);
             case 2:
-                return dt.getZt().getDatumVreme().toLocalTime();
+                return dt.getDatumVreme().toLocalTime();
             case 3:
-                return dt.getZt().getPac();
+                return dt.getPac();
             default:
                 throw new AssertionError();
         }

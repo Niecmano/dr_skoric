@@ -55,7 +55,6 @@ public class FormaTermini extends javax.swing.JFrame {
         btnObrisi = new javax.swing.JButton();
         btnZakazi = new javax.swing.JButton();
         btnObrisiZakazan = new javax.swing.JButton();
-        btnIzvestaj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -143,14 +142,6 @@ public class FormaTermini extends javax.swing.JFrame {
             }
         });
 
-        btnIzvestaj.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
-        btnIzvestaj.setText("Dodaj izveštaj");
-        btnIzvestaj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIzvestajActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -167,10 +158,7 @@ public class FormaTermini extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnIzvestaj, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(64, 64, 64)
-                                .addComponent(btnObrisiZakazan, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnObrisiZakazan, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -211,9 +199,7 @@ public class FormaTermini extends javax.swing.JFrame {
                             .addComponent(btnObrisi)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnObrisiZakazan)
-                            .addComponent(btnIzvestaj))))
+                        .addComponent(btnObrisiZakazan)))
                 .addGap(21, 21, 21)
                 .addComponent(btnZakazi)
                 .addContainerGap(47, Short.MAX_VALUE))
@@ -273,13 +259,6 @@ public class FormaTermini extends javax.swing.JFrame {
         osveziTabelu();
     }//GEN-LAST:event_btnObrisiZakazanActionPerformed
 
-    private void btnIzvestajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzvestajActionPerformed
-        ZakazanTermin zt = mtz.getTermin(tblZakazani.getSelectedRow());
-        Izvestaj i = new Izvestaj(zt, null,null,null,null,null);
-        FormaPrikazIzvestaja fpi = new FormaPrikazIzvestaja(i);
-        fpi.setVisible(true);
-    }//GEN-LAST:event_btnIzvestajActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -326,7 +305,6 @@ public class FormaTermini extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnFilter;
-    private javax.swing.JButton btnIzvestaj;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnObrisiZakazan;
     private javax.swing.JButton btnZakazi;

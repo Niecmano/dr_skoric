@@ -23,7 +23,6 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
 
     private AutocompleteTextField tfPacijent;
     private Izvestaj i;
-    private boolean zakazan = true;
 
     /**
      * Creates new form FormaJedanIzvestaj
@@ -32,27 +31,26 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
         initComponents();
         this.i = i;
         popuniComboLekari();
-        if (i.getZt() != null) {
+        if (i.getPac() != null) {
             DateTimeFormatter f = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-            lblDatum.setText(lblDatum.getText() + " " + i.getZt().getDatumVreme().toLocalDate().format(f));
-            lblPac1.setText(lblPac1.getText() + i.getZt().getPac());
-            cmbLekari1.setSelectedItem(i.getZt().getLekar());
-            if (i.getAnamneza() != null) {
-                taAnamneza.setText(i.getAnamneza());
-                taDijagnoza.setText(i.getDg());
-                taTerapija.setText(i.getTerapija());
-                taNalaz.setText(i.getNalaz());
-                taKontrola.setText(i.getKontrola());
+            lblDatum.setText(lblDatum.getText() + " " + i.getDatumVreme().toLocalDate().format(f));
+            lblPac1.setText(lblPac1.getText() + i.getPac());
+            cmbLekari1.setSelectedItem(i.getLekar());
+            
+            taAnamneza.setText(i.getAnamneza());
+            taDijagnoza.setText(i.getDg());
+            taTerapija.setText(i.getTerapija());
+            taNalaz.setText(i.getNalaz());
+            taKontrola.setText(i.getKontrola());
 
-                btnDodaj.setVisible(false);
-
-                taAnamneza.setEditable(false);
-                taDijagnoza.setEditable(false);
-                taTerapija.setEditable(false);
-                taNalaz.setEditable(false);
-                taKontrola.setEditable(false);
-            }
+            btnDodaj.setVisible(false);
+            taAnamneza.setEditable(false);
+            taDijagnoza.setEditable(false);
+            taTerapija.setEditable(false);
+            taNalaz.setEditable(false);
+            taKontrola.setEditable(false);
             panelPacijent.setVisible(false);
+            
         } else {
             tfPacijent = new AutocompleteTextField(Kontroler.getInstance().vratiPacijente(), 20);
             tfPacijent.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -64,7 +62,6 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
             panelPacijent.revalidate();
             panelPacijent.repaint();
 
-            zakazan = false;
             lblDatum.setVisible(false);
         }
 
@@ -290,12 +287,10 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        if (zakazan == false) {
-            ZakazanTermin zt = new ZakazanTermin(tfPacijent.getSelectedPacijent(),
-                    LocalDateTime.now(), (Lekar) cmbLekari1.getSelectedItem());
-            i.setZt(zt);
-            Kontroler.getInstance().dodajZakazanT(zt);
-        }
+
+        i.setPac(tfPacijent.getSelectedPacijent());
+        i.setDatumVreme(LocalDateTime.now());
+        i.setLekar((Lekar) cmbLekari1.getSelectedItem());
         i.setAnamneza(taAnamneza.getText());
         i.setDg(taDijagnoza.getText());
         i.setTerapija(taTerapija.getText());
