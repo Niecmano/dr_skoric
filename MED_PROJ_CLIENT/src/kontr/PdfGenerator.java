@@ -5,6 +5,9 @@ import com.lowagie.text.DocumentException;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.Image;
+import com.lowagie.text.Font;
+import com.lowagie.text.FontFactory;
+import com.lowagie.text.pdf.BaseFont;
 import domen.Izvestaj;
 
 import javax.swing.*;
@@ -28,40 +31,30 @@ public class PdfGenerator {
 
         try {
             PdfWriter.getInstance(document, baos);
+            Font font10 = FontFactory.getFont("C:/Windows/Fonts/arial.ttf", BaseFont.IDENTITY_H, true, 10);
             document.open();
 
             // LOGO
-            Image img = Image.getInstance(PdfGenerator.class.getResource("/slike/logo.png"));
-            img.scaleToFit(270, 70);
-            img.setAlignment(Image.ALIGN_CENTER);
-//            document.add(img);
+            document.add(new Paragraph("\n\n\nIZVEŠTAJ LEKARA"));
 
-            // PODACI
-            document.add(new Paragraph("\n\n\n\nIZVEŠTAJ LEKARA"));
-            document.add(new Paragraph("\nDatum pregleda: " +
-                    i.getZt().getDatumVreme().toLocalDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))));
-            document.add(new Paragraph("Pacijent: " + i.getZt().getPac().getImePrez() + "\n"));
+            document.add(new Paragraph("\nDatum pregleda: "
+                    + i.getZt().getDatumVreme().toLocalDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")), font10));
 
-            document.add(new Paragraph("\nAnamneza:\n" + i.getAnamneza() + "\n\n"));
-            document.add(new Paragraph("Klinički nalaz:\n" + i.getNalaz() + "\n\n"));
-            document.add(new Paragraph("Dijagnoza:\n" + i.getDg() + "\n\n"));
-            document.add(new Paragraph("Terapija:\n" + i.getTerapija() + "\n\n"));
-            document.add(new Paragraph("Kontrola:\n" + i.getKontrola() + "\n"));
+            document.add(new Paragraph("Pacijent: " + i.getZt().getPac().getImePrez() + "\n", font10));
+
+            document.add(new Paragraph("\nAnamneza:\n" + i.getAnamneza() + "\n\n", font10));
+            document.add(new Paragraph("Klinički nalaz:\n" + i.getNalaz() + "\n\n", font10));
+            document.add(new Paragraph("Dijagnoza:\n" + i.getDg() + "\n\n", font10));
+            document.add(new Paragraph("Terapija:\n" + i.getTerapija() + "\n\n", font10));
+            document.add(new Paragraph("Kontrola:\n" + i.getKontrola() + "\n", font10));
 
             document.add(new Paragraph("\n" + i.getZt().getLekar().getImePrez()));
-            document.add(new Paragraph("Specijalizacija lekara: " + i.getZt().getLekar().getSpec().getNazivSpec()));
+            document.add(new Paragraph("Specijalizacija lekara: " + i.getZt().getLekar().getSpec().getNazivSpec(), font10));
 
             if (i.getZt().getLekar().getSubspec().getNazivSpec() != null) {
-                document.add(new Paragraph("Subspecijalizacija lekara: " +
-                        i.getZt().getLekar().getSubspec().getNazivSpec() + "\n\n"));
+                document.add(new Paragraph("Subspecijalizacija lekara: "
+                        + i.getZt().getLekar().getSubspec().getNazivSpec() + "\n\n", font10));
             }
-
-            // FOOTER
-            Image fut = Image.getInstance(PdfGenerator.class.getResource("/slike/footer.png"));
-            fut.setAlignment(Image.ALIGN_CENTER);
-            fut.scaleToFit(580, 110);
-//            document.add(fut);
-
             document.close();
 
             // =============================
@@ -74,18 +67,17 @@ public class PdfGenerator {
                 PrinterJob job = PrinterJob.getPrinterJob();
                 job.setPageable(new PDFPageable(pdf));
 
-                // Odmah štampaj na default štampač
                 job.print();
-            } catch (PrinterException ex) {
+                }catch (PrinterException ex) {
                 ex.printStackTrace(); // ovde može biti PrinterAbortException ako štampa prekinuta
-            } finally {
+            }finally {
                 pdf.close();
             }
 
-            JOptionPane.showMessageDialog(null, "Dokument poslat na štampu!");
+                JOptionPane.showMessageDialog(null, "Dokument poslat na štampu!");
 
-        } catch (DocumentException | IOException e) {
-            e.printStackTrace();
+            } catch (DocumentException | IOException e) {
+                e.printStackTrace();
+            }
         }
     }
-}

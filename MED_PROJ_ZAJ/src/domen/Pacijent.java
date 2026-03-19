@@ -97,12 +97,12 @@ public class Pacijent extends OpstiDomenskiObjekat implements Serializable{
 
     @Override
     public String vrednostiUbacivanje() {
-        return "0,'"+imePrez+"','"+java.sql.Date.valueOf(datumRodj)+"',"+telefon;
+        return "0,'"+imePrez+"','"+java.sql.Date.valueOf(datumRodj)+"','"+telefon+"'";
     }
 
     @Override
     public String azuriranje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "imePrez='"+imePrez+"',datumRodj='"+java.sql.Date.valueOf(datumRodj)+"',telefon='"+telefon+"' WHERE sifraPac="+sifraPac;
     }
 
     @Override

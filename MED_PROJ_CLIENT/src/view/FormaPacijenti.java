@@ -5,6 +5,7 @@
 package view;
 import domen.Pacijent;
 import java.awt.Font;
+import javax.swing.JOptionPane;
 import kontr.Kontroler;
 /**
  *
@@ -46,6 +47,7 @@ public class FormaPacijenti extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         panelPacijent = new javax.swing.JPanel();
         btnPretrazi = new javax.swing.JButton();
+        btnIzmeni = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -70,7 +72,9 @@ public class FormaPacijenti extends javax.swing.JFrame {
         tblPac.setRowHeight(26);
         jScrollPane1.setViewportView(tblPac);
 
+        btnDodaj.setBackground(new java.awt.Color(0, 0, 153));
         btnDodaj.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        btnDodaj.setForeground(new java.awt.Color(255, 255, 255));
         btnDodaj.setText("Dodaj pacijenta");
         btnDodaj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,7 +82,9 @@ public class FormaPacijenti extends javax.swing.JFrame {
             }
         });
 
+        btnObrisi.setBackground(new java.awt.Color(0, 0, 153));
         btnObrisi.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        btnObrisi.setForeground(new java.awt.Color(255, 255, 255));
         btnObrisi.setText("Obriši pacijenta");
         btnObrisi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,11 +108,23 @@ public class FormaPacijenti extends javax.swing.JFrame {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
+        btnPretrazi.setBackground(new java.awt.Color(0, 0, 153));
         btnPretrazi.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        btnPretrazi.setForeground(new java.awt.Color(255, 255, 255));
         btnPretrazi.setText("Pretrazi pacijenta");
         btnPretrazi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPretraziActionPerformed(evt);
+            }
+        });
+
+        btnIzmeni.setBackground(new java.awt.Color(0, 0, 153));
+        btnIzmeni.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        btnIzmeni.setForeground(new java.awt.Color(255, 255, 255));
+        btnIzmeni.setText("Izmeni pacijenta");
+        btnIzmeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIzmeniActionPerformed(evt);
             }
         });
 
@@ -119,12 +137,15 @@ public class FormaPacijenti extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(122, 122, 122)
-                                .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(35, 35, 35)
+                                    .addComponent(btnIzmeni, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(74, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel8)
@@ -149,7 +170,8 @@ public class FormaPacijenti extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDodaj)
-                    .addComponent(btnObrisi))
+                    .addComponent(btnObrisi)
+                    .addComponent(btnIzmeni))
                 .addContainerGap(77, Short.MAX_VALUE))
         );
 
@@ -168,12 +190,18 @@ public class FormaPacijenti extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        DijalogPacijent dp = new DijalogPacijent(this, rootPaneCheckingEnabled);
+        DijalogPacijent dp = new DijalogPacijent(this, rootPaneCheckingEnabled, null);
         dp.setVisible(true);
         osveziTabelu();
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+        int izbor = tblPac.getSelectedRow();
+        if(izbor==-1){
+            JOptionPane.showMessageDialog(this,"Niste izabrali nijednog pacijenta!", 
+                    "Greska",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         int id = mtp.getPacijent(tblPac.getSelectedRow()).getSifraPac();
         Kontroler.getInstance().izbrisiPacijent(id);
         osveziTabelu();
@@ -186,6 +214,18 @@ public class FormaPacijenti extends javax.swing.JFrame {
               tblPac.setModel(mtp);
         }
     }//GEN-LAST:event_btnPretraziActionPerformed
+
+    private void btnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniActionPerformed
+        int izbor = tblPac.getSelectedRow();
+        if(izbor==-1){
+            JOptionPane.showMessageDialog(this,"Niste izabrali nijednog pacijenta!", 
+                    "Greska",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        DijalogPacijent dp = new DijalogPacijent(this, rootPaneCheckingEnabled, mtp.getPacijent(izbor));
+        dp.setVisible(true);
+        osveziTabelu();
+    }//GEN-LAST:event_btnIzmeniActionPerformed
 
     /**
      * @param args the command line arguments
@@ -224,6 +264,7 @@ public class FormaPacijenti extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnIzmeni;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnPretrazi;
     private javax.swing.JLabel jLabel2;

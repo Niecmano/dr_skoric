@@ -157,6 +157,12 @@ public class Kontroler {
         Odgovor o = (Odgovor) rcv.primi();
         return (List<Pacijent>) o.getOdg();
     }
+
+    public void izmeniPacijenta(Pacijent p) {
+        Zahtev req = new Zahtev(Operacija.IZMENI_PACIJENTA, p);
+        sndr.salji(req);
+        Odgovor o = (Odgovor) rcv.primi();
+    }
 }
 
 //    public Exception izmeniKlub(PlivackiKlub p) {
