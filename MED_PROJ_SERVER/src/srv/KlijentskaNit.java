@@ -46,25 +46,8 @@ public class KlijentskaNit extends Thread {
                         dbb.delete(p);
                         o=new Odgovor(null, null);
                         break;
-                    case VRATI_DOSTUPNE_PREGLEDE:
-                        o = new Odgovor(dbb.select(new DostupanTermin(), false),null);
-                        break;
-                    case DODAJ_DOSTUPNI_PREGLED:
-                        dbb.insert((DostupanTermin)req.getArgum());
-                        o=new Odgovor(null, null);
-                        break;
                     case VRATI_LEKARA:
                         o = new Odgovor(dbb.select(new Lekar(), false),null);
-                        break;
-                    case OBRISI_DOSTUPNI_PREGLED:
-                        dbb.delete((DostupanTermin)req.getArgum());
-                        o=new Odgovor(null, null);
-                        break;
-                    case FILTER_DOSTUPNIH:
-                        LocalDate ld = (LocalDate) req.getArgum();
-                        DostupanTermin dter = new DostupanTermin();
-                        dter.setDatumVreme(ld.atTime(12, 30));
-                        o = new Odgovor(dbb.select(dter, true),null);
                         break;
                     case VRATI_ZAKAZANE_TERMINE:
                         o = new Odgovor(dbb.select(new ZakazanTermin(), false),null);

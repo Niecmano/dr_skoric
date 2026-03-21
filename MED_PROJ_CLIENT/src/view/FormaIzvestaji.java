@@ -212,11 +212,9 @@ public class FormaIzvestaji extends javax.swing.JFrame {
 
     private void btnPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziActionPerformed
         Pacijent pac = tfPacijent.getSelectedPacijent();
-        if(pac!=null){
-            ZakazanTermin zt = new ZakazanTermin(pac, LocalDateTime.now(), (Lekar) cmbLekari1.getSelectedItem());
-            mti = new ModelTabeleIzvestaji(Kontroler.getInstance().filtrirajIzvestaje(zt));
-            tbIzvestaji.setModel(mti);
-        }
+        ZakazanTermin zt = new ZakazanTermin(pac, LocalDateTime.now(), (Lekar) cmbLekari1.getSelectedItem());
+        mti = new ModelTabeleIzvestaji(Kontroler.getInstance().filtrirajIzvestaje(zt));
+        tbIzvestaji.setModel(mti);
     }//GEN-LAST:event_btnPretraziActionPerformed
 
     private void btnPrikazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikazActionPerformed

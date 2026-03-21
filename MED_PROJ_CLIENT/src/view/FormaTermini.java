@@ -4,8 +4,6 @@
  */
 package view;
 
-import domen.DostupanTermin;
-import domen.Izvestaj;
 import domen.ZakazanTermin;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -18,7 +16,6 @@ import kontr.Kontroler;
  */
 public class FormaTermini extends javax.swing.JFrame {
 
-    private ModelTabeleDostupniTermini mtd;
     private ModelTabeleZakazaniTermini mtz;
 
     /**
@@ -26,9 +23,8 @@ public class FormaTermini extends javax.swing.JFrame {
      */
     public FormaTermini() {
         initComponents();
-        mtd = new ModelTabeleDostupniTermini(Kontroler.getInstance().vratiDostupneT());
+
         mtz = new ModelTabeleZakazaniTermini(Kontroler.getInstance().vratiZakazaneT());
-        tblDostupni.setModel(mtd);
         tblZakazani.setModel(mtz);
     }
 
@@ -42,17 +38,12 @@ public class FormaTermini extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         dtcDatumPregleda = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblZakazani = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblDostupni = new javax.swing.JTable();
         btnFilter = new javax.swing.JButton();
-        btnDodaj = new javax.swing.JButton();
-        btnObrisi = new javax.swing.JButton();
         btnZakazi = new javax.swing.JButton();
         btnObrisiZakazan = new javax.swing.JButton();
 
@@ -60,9 +51,6 @@ public class FormaTermini extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 30)); // NOI18N
-        jLabel1.setText("Dostupni termini");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 30)); // NOI18N
         jLabel2.setText("Zakazani termini");
@@ -87,42 +75,11 @@ public class FormaTermini extends javax.swing.JFrame {
         tblZakazani.setRowHeight(25);
         jScrollPane1.setViewportView(tblZakazani);
 
-        tblDostupni.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        tblDostupni.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tblDostupni.setRowHeight(25);
-        jScrollPane2.setViewportView(tblDostupni);
-
         btnFilter.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
         btnFilter.setText("Pretraga po datumu");
         btnFilter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFilterActionPerformed(evt);
-            }
-        });
-
-        btnDodaj.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
-        btnDodaj.setText("Dodaj dostupni termin");
-        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDodajActionPerformed(evt);
-            }
-        });
-
-        btnObrisi.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
-        btnObrisi.setText("Obriši dostupni termin");
-        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnObrisiActionPerformed(evt);
             }
         });
 
@@ -157,22 +114,14 @@ public class FormaTermini extends javax.swing.JFrame {
                         .addComponent(btnFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnObrisiZakazan, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(35, 35, 35)
-                                        .addComponent(btnObrisi))
-                                    .addComponent(btnZakazi, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(131, 131, 131)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 812, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                                .addComponent(btnZakazi, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(66, 66, 66)
+                                .addComponent(btnObrisiZakazan, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 912, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,25 +132,14 @@ public class FormaTermini extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                         .addComponent(dtcDatumPregleda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(btnFilter))
-                .addGap(44, 44, 44)
+                .addGap(58, 58, 58)
+                .addComponent(jLabel2)
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnDodaj)
-                            .addComponent(btnObrisi)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(btnObrisiZakazan)))
-                .addGap(21, 21, 21)
-                .addComponent(btnZakazi)
+                    .addComponent(btnZakazi)
+                    .addComponent(btnObrisiZakazan))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
@@ -219,18 +157,6 @@ public class FormaTermini extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        DijalogDostupanT ddt = new DijalogDostupanT(this, rootPaneCheckingEnabled);
-        ddt.setVisible(true);
-        osveziTabelu();
-    }//GEN-LAST:event_btnDodajActionPerformed
-
-    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
-        DostupanTermin dt = mtd.getTermin(tblDostupni.getSelectedRow());
-        Kontroler.getInstance().izbrisiDostupniT(dt);
-        osveziTabelu();
-    }//GEN-LAST:event_btnObrisiActionPerformed
-
     private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
         Date d = dtcDatumPregleda.getDate();
         System.out.println(d);
@@ -239,22 +165,18 @@ public class FormaTermini extends javax.swing.JFrame {
             ld = ld.plusDays(1);
         }
         System.out.println(ld);
-        mtd = new ModelTabeleDostupniTermini(Kontroler.getInstance().filtrirajTermine(ld));
-        tblDostupni.setModel(mtd);
         mtz = new ModelTabeleZakazaniTermini(Kontroler.getInstance().filtrirajZakazaneT(ld));
         tblZakazani.setModel(mtz);
     }//GEN-LAST:event_btnFilterActionPerformed
 
     private void btnZakaziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZakaziActionPerformed
-        DostupanTermin dt = mtd.getTermin(tblDostupni.getSelectedRow());
-        DijalogZakazivanje dzak = new DijalogZakazivanje(this, rootPaneCheckingEnabled,dt);
+        DijalogZakazivanje dzak = new DijalogZakazivanje(this, rootPaneCheckingEnabled);
         dzak.setVisible(true);
         osveziTabelu();
     }//GEN-LAST:event_btnZakaziActionPerformed
 
     private void btnObrisiZakazanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiZakazanActionPerformed
         ZakazanTermin zt = mtz.getTermin(tblZakazani.getSelectedRow());
-        Kontroler.getInstance().dodajDostupanT(new DostupanTermin(zt.getDatumVreme(),zt.getLekar()));
         Kontroler.getInstance().izbrisiZakazanT(zt);
         osveziTabelu();
     }//GEN-LAST:event_btnObrisiZakazanActionPerformed
@@ -296,26 +218,19 @@ public class FormaTermini extends javax.swing.JFrame {
     }
 
     private void osveziTabelu() {
-        mtd = new ModelTabeleDostupniTermini(Kontroler.getInstance().vratiDostupneT());
         mtz = new ModelTabeleZakazaniTermini(Kontroler.getInstance().vratiZakazaneT());
-        tblDostupni.setModel(mtd);
-        tblZakazani.setModel(mtz);
-        
+        tblZakazani.setModel(mtz);       
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnFilter;
-    private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnObrisiZakazan;
     private javax.swing.JButton btnZakazi;
     private com.toedter.calendar.JDateChooser dtcDatumPregleda;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblDostupni;
     private javax.swing.JTable tblZakazani;
     // End of variables declaration//GEN-END:variables
 }

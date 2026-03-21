@@ -60,12 +60,6 @@ public class Kontroler {
         }
         return null;
     }
-    public List<DostupanTermin> vratiDostupneT() {
-        Zahtev req = new Zahtev(Operacija.VRATI_DOSTUPNE_PREGLEDE, null);
-        sndr.salji(req);
-        Odgovor o = (Odgovor) rcv.primi();
-        return (List<DostupanTermin>) o.getOdg();
-    }
 
     public List<ZakazanTermin> vratiZakazaneT() {
         Zahtev req = new Zahtev(Operacija.VRATI_ZAKAZANE_TERMINE, null);
@@ -74,33 +68,11 @@ public class Kontroler {
         return (List<ZakazanTermin>) o.getOdg();
     }
 
-    public Exception dodajDostupanT(DostupanTermin dostupanTermin) {
-        Zahtev req = new Zahtev(Operacija.DODAJ_DOSTUPNI_PREGLED, dostupanTermin);
-        sndr.salji(req);
-        Odgovor o = (Odgovor) rcv.primi();
-        if(o.getEx()!=null){
-            return o.getEx();
-        }
-        return null;
-    }
-
     public List<Lekar> vratiLekare() {
         Zahtev req = new Zahtev(Operacija.VRATI_LEKARA, null);
         sndr.salji(req);
         Odgovor o = (Odgovor) rcv.primi();
         return (List<Lekar>) o.getOdg();
-    }
-
-    public void izbrisiDostupniT(DostupanTermin dt) {
-        Zahtev req = new Zahtev(Operacija.OBRISI_DOSTUPNI_PREGLED, dt);
-        sndr.salji(req);
-        rcv.primi();}
-
-    public List<DostupanTermin> filtrirajTermine(LocalDate ld) {
-        Zahtev req = new Zahtev(Operacija.FILTER_DOSTUPNIH, ld);
-        sndr.salji(req);
-        Odgovor o = (Odgovor) rcv.primi();
-        return (List<DostupanTermin>) o.getOdg();
     }
 
     public Exception dodajZakazanT(ZakazanTermin zt) {

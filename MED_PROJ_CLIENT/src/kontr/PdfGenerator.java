@@ -7,6 +7,7 @@ import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.Image;
 import com.lowagie.text.Font;
 import com.lowagie.text.FontFactory;
+import com.lowagie.text.PageSize;
 import com.lowagie.text.pdf.BaseFont;
 import domen.Izvestaj;
 
@@ -26,7 +27,7 @@ public class PdfGenerator {
 
     public static void exportIzvestaj(Izvestaj i) {
 
-        Document document = new Document();
+        Document document = new Document(PageSize.A4, 36, 36, 100, 100);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         try {
@@ -35,7 +36,7 @@ public class PdfGenerator {
             document.open();
 
             // LOGO
-            document.add(new Paragraph("\n\n\nIZVEŠTAJ LEKARA"));
+            document.add(new Paragraph("IZVEŠTAJ LEKARA"));
 
             document.add(new Paragraph("\nDatum pregleda: "
                     + i.getDatumVreme().toLocalDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")), font10));

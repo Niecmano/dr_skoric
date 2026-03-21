@@ -145,8 +145,8 @@ public class Izvestaj extends OpstiDomenskiObjekat {
 
     @Override
     public String filter() {
-        if(pac.getImePrez()==null) return "WHERE i.sifraPac="+pac.getSifraPac();
-        if(lekar.getImePrez()==null) return "WHERE i.sifraLekara="+lekar.getSifraLekara();   
+        if(pac==null) return "WHERE i.sifraLekara="+lekar.getSifraLekara(); 
+        if(lekar == null || lekar.getImePrez()==null) return "WHERE i.sifraPac="+pac.getSifraPac(); 
         return "WHERE i.sifraPac="+pac.getSifraPac()+" AND i.sifraLekara="+lekar.getSifraLekara();
     }
 
