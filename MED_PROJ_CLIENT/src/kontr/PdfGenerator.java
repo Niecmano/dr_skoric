@@ -19,6 +19,9 @@ import java.time.format.DateTimeFormatter;
 
 import java.awt.print.PrinterJob;
 import java.awt.print.PrinterException;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.Sides;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.printing.PDFPageable;
@@ -68,17 +71,23 @@ public class PdfGenerator {
                 PrinterJob job = PrinterJob.getPrinterJob();
                 job.setPageable(new PDFPageable(pdf));
 
-                job.print();
-                }catch (PrinterException ex) {
-                ex.printStackTrace(); // ovde može biti PrinterAbortException ako štampa prekinuta
-            }finally {
+                // KREIRANJE SETA ATRIBUTA ZA ŠTAMPU
+                PrintRequestAttributeSet attr = new HashPrintRequestAttributeSet();
+                // Forsiranje jednostrane štampe (Sided.ONE_SIDED)
+                attr.add(Sides.ONE_SIDED);
+
+                // Prosledite atribute u print metodu
+                job.print(attr);
+            } catch (PrinterException ex) {
+                ex.printStackTrace();
+            } finally {
                 pdf.close();
             }
 
-                JOptionPane.showMessageDialog(null, "Dokument poslat na štampu!");
+            JOptionPane.showMessageDialog(null, "Dokument poslat na štampu!");
 
-            } catch (DocumentException | IOException e) {
-                e.printStackTrace();
-            }
+        } catch (DocumentException | IOException e) {
+            e.printStackTrace();
         }
     }
+}
