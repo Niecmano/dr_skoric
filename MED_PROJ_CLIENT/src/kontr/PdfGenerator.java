@@ -44,14 +44,15 @@ public class PdfGenerator {
             document.add(new Paragraph("\nDatum pregleda: "
                     + i.getDatumVreme().toLocalDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")), font10));
 
-            document.add(new Paragraph("Pacijent: " + i.getPac().getImePrez() + "\n", font10));
+            document.add(new Paragraph("Pacijent: " + i.getPac().getImePrez() + "\n\n", font10));
 
-            document.add(new Paragraph("\nAnamneza:\n" + i.getAnamneza() + "\n\n", font10));
-            document.add(new Paragraph("Klinički nalaz:\n" + i.getNalaz() + "\n\n", font10));
-            document.add(new Paragraph("Dijagnoza:\n" + i.getDg() + "\n\n", font10));
-            document.add(new Paragraph("Terapija:\n" + i.getTerapija() + "\n\n", font10));
-            document.add(new Paragraph("Kontrola:\n" + i.getKontrola() + "\n", font10));
-
+            if(!i.getAnamneza().isEmpty()) document.add(new Paragraph("Anamneza:\n" + i.getAnamneza() + "\n\n", font10));
+            if(!i.getNalaz().isEmpty()) document.add(new Paragraph("Klinički nalaz:\n" + i.getNalaz() + "\n\n", font10));
+            if(!i.getDg().isEmpty()) document.add(new Paragraph("Dijagnoza:\n" + i.getDg() + "\n\n", font10));
+            if(!i.getTerapija().isEmpty()) document.add(new Paragraph("Terapija:\n" + i.getTerapija() + "\n\n", font10));
+            if(!i.getKontrola().isEmpty()) document.add(new Paragraph("Kontrola:\n" + i.getKontrola() + "\n", font10));
+            if(i.getZakljucak()!=null && !i.getZakljucak().isEmpty()) document.add(new Paragraph("Zaključak:\n" + i.getZakljucak()+ "\n", font10));
+            
             document.add(new Paragraph("\n" + i.getLekar().getImePrez()));
             document.add(new Paragraph("Specijalizacija lekara: " + i.getLekar().getSpec().getNazivSpec(), font10));
 

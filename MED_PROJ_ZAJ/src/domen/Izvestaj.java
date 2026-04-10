@@ -24,11 +24,12 @@ public class Izvestaj extends OpstiDomenskiObjekat {
     private String dg;
     private String terapija;
     private String kontrola;
+    private String zakljucak;
 
     public Izvestaj() {
     }
     
-    public Izvestaj(Pacijent pac, Lekar lekar, LocalDateTime datumVreme, String anamneza, String dg, String terapija, String nalaz, String kontrola) {
+    public Izvestaj(Pacijent pac, Lekar lekar, LocalDateTime datumVreme, String anamneza, String dg, String terapija, String nalaz, String kontrola, String zakljucak) {
         this.pac = pac;
         this.lekar = lekar;
         this.datumVreme = datumVreme;
@@ -37,6 +38,7 @@ public class Izvestaj extends OpstiDomenskiObjekat {
         this.terapija = terapija;
         this.kontrola = kontrola;
         this.nalaz = nalaz;
+        this.zakljucak = zakljucak;
     }
 
     public Pacijent getPac() {
@@ -103,6 +105,14 @@ public class Izvestaj extends OpstiDomenskiObjekat {
     public void setKontrola(String kontrola) {
         this.kontrola = kontrola;
     }
+
+    public String getZakljucak() {
+        return zakljucak;
+    }
+
+    public void setZakljucak(String zakljucak) {
+        this.zakljucak = zakljucak;
+    }
     
     @Override
     public String nazivTabele() {
@@ -130,7 +140,7 @@ public class Izvestaj extends OpstiDomenskiObjekat {
     @Override
     public String vrednostiUbacivanje() {
         return pac.getSifraPac()+",'" + datumVreme + "'," 
-                + lekar.getSifraLekara()+",'"+anamneza+"','"+dg+"','"+terapija+"','"+nalaz+"','"+kontrola+"'";
+                + lekar.getSifraLekara()+",'"+anamneza+"','"+dg+"','"+terapija+"','"+nalaz+"','"+kontrola+"','"+zakljucak+"'";
     }
 
     @Override
@@ -160,7 +170,7 @@ public class Izvestaj extends OpstiDomenskiObjekat {
                 new Specijalizacija(rs.getInt("subsp.sifraSpec"), rs.getString("subsp.nazivSpec")));
                 Pacijent p = new Pacijent(rs.getInt("p.sifraPac"), rs.getString("p.imePrez"), rs.getDate("datumRodj").toLocalDate());
                 Izvestaj i = new Izvestaj(p, le, rs.getTimestamp("datumVreme").toInstant().atZone(ZoneId.of("Europe/Belgrade")).toLocalDateTime(),
-                        rs.getString("anamneza"),rs.getString("dg"),rs.getString("terapija"),rs.getString("nalaz"),rs.getString("kontrola"));
+                        rs.getString("anamneza"),rs.getString("dg"),rs.getString("terapija"),rs.getString("nalaz"),rs.getString("kontrola"), rs.getString("zakljucak"));
                 izvs.add(i);
             }
         } catch (SQLException ex) {
