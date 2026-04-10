@@ -87,6 +87,10 @@ public class KlijentskaNit extends Thread {
                         dbb.update((Pacijent)req.getArgum());
                         o=new Odgovor(null, null);
                         break;
+                    case IZMENI_IZVESTAJ:
+                        dbb.update((Izvestaj)req.getArgum());
+                        o=new Odgovor(null, null);
+                        break;
                     default:
                         throw new RuntimeException("Operacija ne postoji");
                 }

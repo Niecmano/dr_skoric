@@ -145,7 +145,8 @@ public class Izvestaj extends OpstiDomenskiObjekat {
 
     @Override
     public String azuriranje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "anamneza='"+anamneza+"',dg='"+dg+"',terapija='"+terapija+"',nalaz='"+nalaz+"',kontrola='"+kontrola+
+                "',zakljucak='"+zakljucak+"' WHERE datumVreme='"+datumVreme+"'";
     }
 
     @Override

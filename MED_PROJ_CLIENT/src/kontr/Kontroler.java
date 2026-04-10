@@ -25,7 +25,7 @@ public class Kontroler {
     private Kontroler(){
         try {
             skt = new Socket("localhost", 9009);
-//            skt = new Socket("192.168.0.19", 9009);
+//            skt = new Socket("192.168.0.23", 9009);
             sndr = new Posiljalac(skt);
             rcv = new Primalac(skt);
         } catch (IOException ex) {
@@ -132,6 +132,12 @@ public class Kontroler {
 
     public void izmeniPacijenta(Pacijent p) {
         Zahtev req = new Zahtev(Operacija.IZMENI_PACIJENTA, p);
+        sndr.salji(req);
+        Odgovor o = (Odgovor) rcv.primi();
+    }
+
+    public void izmeniIzvestaj(Izvestaj i) {
+        Zahtev req = new Zahtev(Operacija.IZMENI_IZVESTAJ, i);
         sndr.salji(req);
         Odgovor o = (Odgovor) rcv.primi();
     }

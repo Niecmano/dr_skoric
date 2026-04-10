@@ -45,12 +45,6 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
             taZakljucak.setText(i.getZakljucak());
 
             btnDodaj.setVisible(false);
-            taAnamneza.setEditable(false);
-            taDijagnoza.setEditable(false);
-            taTerapija.setEditable(false);
-            taNalaz.setEditable(false);
-            taKontrola.setEditable(false);
-            taZakljucak.setEditable(false);
             panelPacijent.setVisible(false);
             
         } else {
@@ -104,6 +98,7 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
         lblDatum5 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         taZakljucak = new javax.swing.JTextArea();
+        btnIzmeni = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -202,6 +197,16 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
         taZakljucak.setWrapStyleWord(true);
         jScrollPane6.setViewportView(taZakljucak);
 
+        btnIzmeni.setBackground(new java.awt.Color(0, 51, 153));
+        btnIzmeni.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        btnIzmeni.setForeground(new java.awt.Color(255, 255, 255));
+        btnIzmeni.setText("Izmeni izveštaj");
+        btnIzmeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIzmeniActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -233,6 +238,8 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnIzmeni, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(99, 99, 99)
                                 .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(46, 46, 46))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -296,7 +303,9 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDodaj)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDodaj)
+                            .addComponent(btnIzmeni))
                         .addGap(20, 20, 20))))
         );
 
@@ -330,9 +339,22 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnDodajActionPerformed
 
+    private void btnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniActionPerformed
+        i.setAnamneza(taAnamneza.getText());
+        i.setDg(taDijagnoza.getText());
+        i.setTerapija(taTerapija.getText());
+        i.setNalaz(taNalaz.getText());
+        i.setKontrola(taKontrola.getText());
+        i.setZakljucak(taZakljucak.getText());
+        Kontroler.getInstance().izmeniIzvestaj(i);
+        PdfGenerator.exportIzvestaj(i);
+        this.dispose();
+    }//GEN-LAST:event_btnIzmeniActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnIzmeni;
     private javax.swing.JComboBox<Lekar> cmbLekari1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
