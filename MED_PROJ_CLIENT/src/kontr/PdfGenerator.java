@@ -50,7 +50,7 @@ public class PdfGenerator {
             if(!i.getNalaz().isEmpty()) document.add(new Paragraph("Klinički nalaz:\n" + i.getNalaz() + "\n\n", font10));
             if(!i.getDg().isEmpty()) document.add(new Paragraph("Dijagnoza:\n" + i.getDg() + "\n\n", font10));
             if(!i.getTerapija().isEmpty()) document.add(new Paragraph("Terapija:\n" + i.getTerapija() + "\n\n", font10));
-            if(!i.getKontrola().isEmpty()) document.add(new Paragraph("Kontrola:\n" + i.getKontrola() + "\n", font10));
+            if(!i.getKontrola().isEmpty()) document.add(new Paragraph("Kontrola:\n" + i.getKontrola() + "\n\n", font10));
             if(i.getZakljucak()!=null && !i.getZakljucak().isEmpty()) document.add(new Paragraph("Zaključak:\n" + i.getZakljucak()+ "\n", font10));
             
             document.add(new Paragraph("\n" + i.getLekar().getImePrez()));

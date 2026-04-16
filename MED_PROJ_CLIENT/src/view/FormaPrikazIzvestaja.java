@@ -58,6 +58,7 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
             panelPacijent.revalidate();
             panelPacijent.repaint();
 
+            btnIzmeni.setVisible(false);
             lblDatum.setVisible(false);
         }
 
