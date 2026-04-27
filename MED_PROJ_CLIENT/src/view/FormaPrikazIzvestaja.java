@@ -6,12 +6,15 @@ package view;
 
 import domen.Izvestaj;
 import domen.Lekar;
+import domen.Pacijent;
 import domen.ZakazanTermin;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.swing.JOptionPane;
 import kontr.Kontroler;
 import kontr.PdfGenerator;
 
@@ -326,7 +329,14 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
 
-        i.setPac(tfPacijent.getSelectedPacijent());
+        if(tfPacijent.getSelectedPacijent()!=null) i.setPac(tfPacijent.getSelectedPacijent());
+        else{
+            Pacijent neu = new Pacijent(0, tfPacijent.getText(), LocalDate.MIN, "0");
+            neu.setSifraPac((int) Kontroler.getInstance().dodajPacijent(neu));
+            System.out.println(neu.getSifraPac()); // ispise se kako treba, ne bude 0
+            i.setPac(neu);
+            System.out.println(i.getPac().getSifraPac());
+        }
         i.setDatumVreme(LocalDateTime.now());
         i.setLekar((Lekar) cmbLekari1.getSelectedItem());
         i.setAnamneza(taAnamneza.getText());
@@ -335,6 +345,7 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
         i.setNalaz(taNalaz.getText());
         i.setKontrola(taKontrola.getText());
         i.setZakljucak(taZakljucak.getText());
+        System.out.println("Id pac izv:"+i.getPac().getSifraPac());
         Kontroler.getInstance().dodajIzvestaj(i);
         PdfGenerator.exportIzvestaj(i);
         this.dispose();

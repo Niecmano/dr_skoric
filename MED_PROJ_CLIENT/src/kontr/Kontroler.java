@@ -51,14 +51,14 @@ public class Kontroler {
         rcv.primi();
     }
 
-    public Exception dodajPacijent(Pacijent p) {
+    public Object dodajPacijent(Pacijent p) {
         Zahtev req = new Zahtev(Operacija.DODAJ_PACIJENTA, p);
         sndr.salji(req);
         Odgovor o = (Odgovor) rcv.primi();
         if(o.getEx()!=null){
             return o.getEx();
         }
-        return null;
+        return o.getOdg();
     }
 
     public List<ZakazanTermin> vratiZakazaneT() {
@@ -115,6 +115,7 @@ public class Kontroler {
 
     public Exception dodajIzvestaj(Izvestaj i) {
         Zahtev req = new Zahtev(Operacija.DODAJ_IZVESTAJ, i);
+        System.out.println("Kontroler:"+i.getPac().getSifraPac());
         sndr.salji(req);
         Odgovor o = (Odgovor) rcv.primi();
         if(o.getEx()!=null){

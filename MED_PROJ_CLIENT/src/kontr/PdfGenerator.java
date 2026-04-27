@@ -53,13 +53,7 @@ public class PdfGenerator {
             if(!i.getKontrola().isEmpty()) document.add(new Paragraph("Kontrola:\n" + i.getKontrola() + "\n\n", font10));
             if(i.getZakljucak()!=null && !i.getZakljucak().isEmpty()) document.add(new Paragraph("Zaključak:\n" + i.getZakljucak()+ "\n", font10));
             
-            document.add(new Paragraph("\n" + i.getLekar().getImePrez()));
-            document.add(new Paragraph("Specijalizacija lekara: " + i.getLekar().getSpec().getNazivSpec(), font10));
-
-            if (i.getLekar().getSubspec().getNazivSpec() != null) {
-                document.add(new Paragraph("Subspecijalizacija lekara: "
-                        + i.getLekar().getSubspec().getNazivSpec() + "\n\n", font10));
-            }
+            document.add(new Paragraph("\nLekar: " + i.getLekar().getImePrez()));
             document.close();
 
             // =============================

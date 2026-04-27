@@ -37,8 +37,7 @@ public class KlijentskaNit extends Thread {
                         o = new Odgovor(dbb.select(new Pacijent(), false),null);
                         break;
                     case DODAJ_PACIJENTA:
-                        dbb.insert((Pacijent)req.getArgum());
-                        o=new Odgovor(null, null);
+                        o=new Odgovor(dbb.insert((Pacijent)req.getArgum()), null);
                         break;
                     case OBRISI_PACIJENTA:
                         Pacijent p = new Pacijent();
@@ -76,6 +75,7 @@ public class KlijentskaNit extends Thread {
                         o = new Odgovor(dbb.select(iz, false),null);
                         break;
                     case DODAJ_IZVESTAJ:
+                        System.out.println("Server:"+((Izvestaj)req.getArgum()).getPac().getSifraPac());
                         dbb.insert((Izvestaj)req.getArgum());
                         o=new Odgovor(null, null);
                         break;  

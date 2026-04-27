@@ -65,15 +65,24 @@ public class DBBroker {
         }
     }
     
-    public void insert(OpstiDomenskiObjekat opstiDO){
+    public int insert(OpstiDomenskiObjekat opstiDO){
+        int generatedId = -1;
         try {
             String upit = "INSERT INTO " + opstiDO.nazivTabele()+ " VALUES(" + opstiDO.vrednostiUbacivanje()+")";
             System.out.println(upit);
-            Statement st = conn.createStatement();
-            st.executeUpdate(upit);
-        } catch (SQLException ex) {
-            System.out.println(ex);
+        PreparedStatement ps = conn.prepareStatement(upit, Statement.RETURN_GENERATED_KEYS);
+        ps.executeUpdate();
+
+        ResultSet rs = ps.getGeneratedKeys();
+        if (rs.next()) {
+            generatedId = rs.getInt(1);
         }
+
+    } catch (SQLException ex) {
+        System.out.println(ex);
+    }
+
+    return generatedId;
     }
 }
 

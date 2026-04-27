@@ -22,6 +22,7 @@ public class Posiljalac {
 
     public synchronized void salji(Object obj) {
         try {
+            out.reset();
             out.writeObject(obj);
             out.flush();
         } catch (IOException ex) {
