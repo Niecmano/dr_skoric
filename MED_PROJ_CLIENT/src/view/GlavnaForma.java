@@ -4,6 +4,7 @@
  */
 package view;
 
+import domen.Izvestaj;
 import javax.swing.ImageIcon;
 
 /**
@@ -19,6 +20,8 @@ public class GlavnaForma extends javax.swing.JFrame {
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/slike/logo.png"));
         jLabel2.setIcon(icon);
+        jPanel1.revalidate();
+        jPanel1.repaint();
     }
 
     /**
@@ -34,7 +37,9 @@ public class GlavnaForma extends javax.swing.JFrame {
         btnTermini = new javax.swing.JButton();
         btnPacijenti = new javax.swing.JButton();
         btnIzvestaji = new javax.swing.JButton();
+        btnDodaj = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        btnDodaj1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 255, 255));
@@ -46,7 +51,9 @@ public class GlavnaForma extends javax.swing.JFrame {
         btnTermini.setFont(new java.awt.Font("Segoe UI", 3, 28)); // NOI18N
         btnTermini.setForeground(new java.awt.Color(255, 255, 255));
         btnTermini.setText("Termini pregleda");
-        btnTermini.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
+        btnTermini.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnTermini.setMaximumSize(new java.awt.Dimension(233, 42));
+        btnTermini.setMinimumSize(new java.awt.Dimension(250, 0));
         btnTermini.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTerminiActionPerformed(evt);
@@ -57,7 +64,9 @@ public class GlavnaForma extends javax.swing.JFrame {
         btnPacijenti.setFont(new java.awt.Font("Segoe UI", 3, 28)); // NOI18N
         btnPacijenti.setForeground(new java.awt.Color(255, 255, 255));
         btnPacijenti.setText("Pacijenti");
-        btnPacijenti.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
+        btnPacijenti.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnPacijenti.setMaximumSize(new java.awt.Dimension(120, 42));
+        btnPacijenti.setMinimumSize(new java.awt.Dimension(250, 0));
         btnPacijenti.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPacijentiActionPerformed(evt);
@@ -67,11 +76,39 @@ public class GlavnaForma extends javax.swing.JFrame {
         btnIzvestaji.setBackground(new java.awt.Color(0, 51, 153));
         btnIzvestaji.setFont(new java.awt.Font("Segoe UI", 3, 28)); // NOI18N
         btnIzvestaji.setForeground(new java.awt.Color(255, 255, 255));
-        btnIzvestaji.setText("Izveštaji");
-        btnIzvestaji.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
+        btnIzvestaji.setText("Svi izveštaji");
+        btnIzvestaji.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnIzvestaji.setMaximumSize(new java.awt.Dimension(113, 42));
+        btnIzvestaji.setMinimumSize(new java.awt.Dimension(250, 0));
         btnIzvestaji.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIzvestajiActionPerformed(evt);
+            }
+        });
+
+        btnDodaj.setBackground(new java.awt.Color(0, 51, 153));
+        btnDodaj.setFont(new java.awt.Font("Segoe UI", 3, 28)); // NOI18N
+        btnDodaj.setForeground(new java.awt.Color(255, 255, 255));
+        btnDodaj.setText("Dodaj izveštaj (iz šablona)");
+        btnDodaj.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDodaj.setMaximumSize(new java.awt.Dimension(190, 42));
+        btnDodaj.setMinimumSize(new java.awt.Dimension(250, 0));
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajActionPerformed(evt);
+            }
+        });
+
+        btnDodaj1.setBackground(new java.awt.Color(0, 51, 153));
+        btnDodaj1.setFont(new java.awt.Font("Segoe UI", 3, 28)); // NOI18N
+        btnDodaj1.setForeground(new java.awt.Color(255, 255, 255));
+        btnDodaj1.setText("Dodaj izveštaj (Word)");
+        btnDodaj1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDodaj1.setMaximumSize(new java.awt.Dimension(190, 42));
+        btnDodaj1.setMinimumSize(new java.awt.Dimension(250, 0));
+        btnDodaj1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodaj1ActionPerformed(evt);
             }
         });
 
@@ -80,31 +117,34 @@ public class GlavnaForma extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnTermini, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btnPacijenti, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnIzvestaji, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(92, 92, 92)
-                .addComponent(jLabel2)
-                .addContainerGap(686, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnDodaj, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+                    .addComponent(btnDodaj1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnIzvestaji, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPacijenti, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTermini, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(140, 140, 140)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(98, 98, 98)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(btnTermini, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(btnIzvestaji, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(btnPacijenti, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(jLabel2)))
-                .addContainerGap(241, Short.MAX_VALUE))
+                        .addComponent(btnIzvestaji, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(btnDodaj1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(btnPacijenti, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(btnTermini, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -121,20 +161,30 @@ public class GlavnaForma extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnTerminiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminiActionPerformed
-        FormaTermini ft = new FormaTermini();
-        ft.setVisible(true);
-    }//GEN-LAST:event_btnTerminiActionPerformed
+    private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
+        FormaPrikazIzvestaja fji = new FormaPrikazIzvestaja(new Izvestaj());
+        fji.setVisible(true);
+    }//GEN-LAST:event_btnDodajActionPerformed
+
+    private void btnIzvestajiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzvestajiActionPerformed
+        FormaIzvestaji fi = new FormaIzvestaji();
+        fi.setVisible(true);
+    }//GEN-LAST:event_btnIzvestajiActionPerformed
 
     private void btnPacijentiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacijentiActionPerformed
         FormaPacijenti fp = new FormaPacijenti();
         fp.setVisible(true);
     }//GEN-LAST:event_btnPacijentiActionPerformed
 
-    private void btnIzvestajiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzvestajiActionPerformed
-        FormaIzvestaji fi = new FormaIzvestaji();
-        fi.setVisible(true);
-    }//GEN-LAST:event_btnIzvestajiActionPerformed
+    private void btnTerminiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminiActionPerformed
+        FormaTermini ft = new FormaTermini();
+        ft.setVisible(true);
+    }//GEN-LAST:event_btnTerminiActionPerformed
+
+    private void btnDodaj1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodaj1ActionPerformed
+        FormaBlankoIzvestaj fbi = new FormaBlankoIzvestaj(new Izvestaj());
+        fbi.setVisible(true);
+    }//GEN-LAST:event_btnDodaj1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,6 +222,8 @@ public class GlavnaForma extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnDodaj1;
     private javax.swing.JButton btnIzvestaji;
     private javax.swing.JButton btnPacijenti;
     private javax.swing.JButton btnTermini;

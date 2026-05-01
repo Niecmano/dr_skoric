@@ -45,7 +45,6 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
             taTerapija.setText(i.getTerapija());
             taNalaz.setText(i.getNalaz());
             taKontrola.setText(i.getKontrola());
-            taZakljucak.setText(i.getZakljucak());
 
             btnDodaj.setVisible(false);
             panelPacijent.setVisible(false);
@@ -99,12 +98,10 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
         lblDatum4 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         taKontrola = new javax.swing.JTextArea();
-        lblDatum5 = new javax.swing.JLabel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        taZakljucak = new javax.swing.JTextArea();
         btnIzmeni = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1250, 681));
@@ -191,16 +188,6 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
         taKontrola.setWrapStyleWord(true);
         jScrollPane5.setViewportView(taKontrola);
 
-        lblDatum5.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
-        lblDatum5.setText("Zaključak:");
-
-        taZakljucak.setColumns(20);
-        taZakljucak.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        taZakljucak.setLineWrap(true);
-        taZakljucak.setRows(5);
-        taZakljucak.setWrapStyleWord(true);
-        jScrollPane6.setViewportView(taZakljucak);
-
         btnIzmeni.setBackground(new java.awt.Color(0, 51, 153));
         btnIzmeni.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
         btnIzmeni.setForeground(new java.awt.Color(255, 255, 255));
@@ -253,12 +240,8 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
                                     .addComponent(lblDatum3, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblDatum4, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(73, 73, 73))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblDatum5, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())))))
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(57, 57, 57))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,14 +253,14 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
                     .addComponent(lblDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblPac1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(panelPacijent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addComponent(lblPac1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panelPacijent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblDatum1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -285,28 +268,23 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblDatum2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
                         .addComponent(lblDatum3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(lblDatum4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 24, Short.MAX_VALUE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblDatum5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblDatum4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnDodaj)
                             .addComponent(btnIzmeni))
@@ -327,6 +305,18 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniActionPerformed
+        i.setLekar((Lekar) cmbLekari1.getSelectedItem());
+        i.setAnamneza(taAnamneza.getText());
+        i.setDg(taDijagnoza.getText());
+        i.setTerapija(taTerapija.getText());
+        i.setNalaz(taNalaz.getText());
+        i.setKontrola(taKontrola.getText());
+        Kontroler.getInstance().izmeniIzvestaj(i);
+        PdfGenerator.exportIzvestaj(i);
+        this.dispose();
+    }//GEN-LAST:event_btnIzmeniActionPerformed
+
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
 
         if(tfPacijent.getSelectedPacijent()!=null) i.setPac(tfPacijent.getSelectedPacijent());
@@ -344,24 +334,11 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
         i.setTerapija(taTerapija.getText());
         i.setNalaz(taNalaz.getText());
         i.setKontrola(taKontrola.getText());
-        i.setZakljucak(taZakljucak.getText());
         System.out.println("Id pac izv:"+i.getPac().getSifraPac());
         Kontroler.getInstance().dodajIzvestaj(i);
         PdfGenerator.exportIzvestaj(i);
         this.dispose();
     }//GEN-LAST:event_btnDodajActionPerformed
-
-    private void btnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniActionPerformed
-        i.setAnamneza(taAnamneza.getText());
-        i.setDg(taDijagnoza.getText());
-        i.setTerapija(taTerapija.getText());
-        i.setNalaz(taNalaz.getText());
-        i.setKontrola(taKontrola.getText());
-        i.setZakljucak(taZakljucak.getText());
-        Kontroler.getInstance().izmeniIzvestaj(i);
-        PdfGenerator.exportIzvestaj(i);
-        this.dispose();
-    }//GEN-LAST:event_btnIzmeniActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -376,13 +353,11 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JLabel lblDatum;
     private javax.swing.JLabel lblDatum1;
     private javax.swing.JLabel lblDatum2;
     private javax.swing.JLabel lblDatum3;
     private javax.swing.JLabel lblDatum4;
-    private javax.swing.JLabel lblDatum5;
     private javax.swing.JLabel lblLekar;
     private javax.swing.JLabel lblPac1;
     private javax.swing.JPanel panelPacijent;
@@ -391,7 +366,6 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
     private javax.swing.JTextArea taKontrola;
     private javax.swing.JTextArea taNalaz;
     private javax.swing.JTextArea taTerapija;
-    private javax.swing.JTextArea taZakljucak;
     // End of variables declaration//GEN-END:variables
         private void popuniComboLekari() {
         List<Lekar> ls = Kontroler.getInstance().vratiLekare();

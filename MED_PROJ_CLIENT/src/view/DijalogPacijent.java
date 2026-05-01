@@ -6,7 +6,9 @@ package view;
 
 import domen.Pacijent;
 import java.awt.Frame;
+import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import kontr.Kontroler;
 
@@ -15,21 +17,24 @@ import kontr.Kontroler;
  * @author Nemanja
  */
 public class DijalogPacijent extends javax.swing.JDialog {
+
     private int sifra;
+
     /**
      * Creates new form DijalogPacijent
      */
     public DijalogPacijent(Frame parent, boolean modal, Pacijent p) {
         super(parent, modal);
         initComponents();
-        if(p!=null){
+        if (p != null) {
             sifra = p.getSifraPac();
             tfTelefon.setText(p.getTelefon());
             tfImePrez.setText(p.getImePrez());
-            dtcDatumRodj.setDate(Date.from(p.getDatumRodj().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+            tfDatumRodj.setText(p.getDatumRodj().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
             btnDodaj.setVisible(false);
+        } else {
+            btnIzmeni.setVisible(false);
         }
-        else btnIzmeni.setVisible(false);
     }
 
     /**
@@ -44,12 +49,12 @@ public class DijalogPacijent extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         btnDodaj = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        dtcDatumRodj = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
         tfImePrez = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         tfTelefon = new javax.swing.JTextField();
         btnIzmeni = new javax.swing.JButton();
+        tfDatumRodj = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -65,8 +70,6 @@ public class DijalogPacijent extends javax.swing.JDialog {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("Datum rodjenja:");
-
-        dtcDatumRodj.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setText("Telefon:");
@@ -86,6 +89,8 @@ public class DijalogPacijent extends javax.swing.JDialog {
             }
         });
 
+        tfDatumRodj.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -100,7 +105,7 @@ public class DijalogPacijent extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dtcDatumRodj, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tfDatumRodj, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -117,19 +122,18 @@ public class DijalogPacijent extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(131, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfImePrez, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(dtcDatumRodj, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfImePrez, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfDatumRodj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(132, 132, 132)
+                .addGap(119, 119, 119)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIzmeni)
                     .addComponent(btnDodaj))
@@ -153,31 +157,34 @@ public class DijalogPacijent extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        Date d = dtcDatumRodj.getDate();
-        Pacijent p = new Pacijent(0, tfImePrez.getText(), d.toInstant().atZone(ZoneId.of("Europe/Belgrade")).toLocalDate());
+        String datum = tfDatumRodj.getText().replaceAll("\\.$", "");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy");
+        LocalDate d = LocalDate.parse(datum, formatter);
+        Pacijent p = new Pacijent(0, tfImePrez.getText(), d);
         p.setTelefon(tfTelefon.getText());
         Kontroler.getInstance().dodajPacijent(p);
         this.dispose();
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniActionPerformed
-        Date d = dtcDatumRodj.getDate();
-        Pacijent p = new Pacijent(sifra, tfImePrez.getText(), d.toInstant().atZone(ZoneId.of("Europe/Belgrade")).toLocalDate());
+        String datum = tfDatumRodj.getText().replaceAll("\\.$", "");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy");
+        LocalDate d = LocalDate.parse(datum, formatter);
+        Pacijent p = new Pacijent(sifra, tfImePrez.getText(), d);
         p.setTelefon(tfTelefon.getText());
         Kontroler.getInstance().izmeniPacijenta(p);
         this.dispose();
     }//GEN-LAST:event_btnIzmeniActionPerformed
 
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnIzmeni;
-    private com.toedter.calendar.JDateChooser dtcDatumRodj;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField tfDatumRodj;
     private javax.swing.JTextField tfImePrez;
     private javax.swing.JTextField tfTelefon;
     // End of variables declaration//GEN-END:variables

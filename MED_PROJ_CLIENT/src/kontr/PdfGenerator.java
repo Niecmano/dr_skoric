@@ -45,14 +45,26 @@ public class PdfGenerator {
                     + i.getDatumVreme().toLocalDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")), font10));
 
             document.add(new Paragraph("Pacijent: " + i.getPac().getImePrez() + "\n\n", font10));
+            if (i.getNalaz() == null || i.getNalaz().toLowerCase().contains("null")) {
+                document.add(new Paragraph(i.getAnamneza() + "\n\n", font10));
+            } else {
+                if (!i.getAnamneza().isEmpty()) {
+                    document.add(new Paragraph("Anamneza:\n" + i.getAnamneza() + "\n\n", font10));
+                }
+                if (i.getNalaz() != null && !i.getNalaz().isEmpty()) {
+                    document.add(new Paragraph("Klinički nalaz:\n" + i.getNalaz() + "\n\n", font10));
+                }
+                if (i.getDg() != null && !i.getDg().isEmpty()) {
+                    document.add(new Paragraph("Dijagnoza:\n" + i.getDg() + "\n\n", font10));
+                }
+                if (i.getTerapija() != null && !i.getTerapija().isEmpty()) {
+                    document.add(new Paragraph("Terapija:\n" + i.getTerapija() + "\n\n", font10));
+                }
+                if (i.getKontrola() != null && !i.getKontrola().isEmpty()) {
+                    document.add(new Paragraph("Kontrola:\n" + i.getKontrola() + "\n\n", font10));
+                }
+            }
 
-            if(!i.getAnamneza().isEmpty()) document.add(new Paragraph("Anamneza:\n" + i.getAnamneza() + "\n\n", font10));
-            if(!i.getNalaz().isEmpty()) document.add(new Paragraph("Klinički nalaz:\n" + i.getNalaz() + "\n\n", font10));
-            if(!i.getDg().isEmpty()) document.add(new Paragraph("Dijagnoza:\n" + i.getDg() + "\n\n", font10));
-            if(!i.getTerapija().isEmpty()) document.add(new Paragraph("Terapija:\n" + i.getTerapija() + "\n\n", font10));
-            if(!i.getKontrola().isEmpty()) document.add(new Paragraph("Kontrola:\n" + i.getKontrola() + "\n\n", font10));
-            if(i.getZakljucak()!=null && !i.getZakljucak().isEmpty()) document.add(new Paragraph("Zaključak:\n" + i.getZakljucak()+ "\n", font10));
-            
             document.add(new Paragraph("\nLekar: " + i.getLekar().getImePrez()));
             document.close();
 

@@ -48,6 +48,7 @@ public class FormaPacijenti extends javax.swing.JFrame {
         panelPacijent = new javax.swing.JPanel();
         btnPretrazi = new javax.swing.JButton();
         btnIzmeni = new javax.swing.JButton();
+        btnIzvestaji = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -128,6 +129,16 @@ public class FormaPacijenti extends javax.swing.JFrame {
             }
         });
 
+        btnIzvestaji.setBackground(new java.awt.Color(0, 0, 153));
+        btnIzvestaji.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        btnIzvestaji.setForeground(new java.awt.Color(255, 255, 255));
+        btnIzvestaji.setText("Izveštaji pacijenta");
+        btnIzvestaji.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIzvestajiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -138,14 +149,17 @@ public class FormaPacijenti extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(35, 35, 35)
-                                    .addComponent(btnIzmeni, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnIzvestaji, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(158, 158, 158)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(btnIzmeni, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(145, 145, 145))))
                         .addContainerGap(74, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel8)
@@ -170,9 +184,12 @@ public class FormaPacijenti extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDodaj)
-                    .addComponent(btnObrisi)
+                    .addComponent(btnObrisi))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnIzvestaji)
                     .addComponent(btnIzmeni))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -227,6 +244,17 @@ public class FormaPacijenti extends javax.swing.JFrame {
         osveziTabelu();
     }//GEN-LAST:event_btnIzmeniActionPerformed
 
+    private void btnIzvestajiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzvestajiActionPerformed
+        int izbor = tblPac.getSelectedRow();
+        if(izbor==-1){
+            JOptionPane.showMessageDialog(this,"Niste izabrali nijednog pacijenta!", 
+                    "Greska",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        FormaIzvestajiPacijenta fip = new FormaIzvestajiPacijenta(mtp.getPacijent(izbor));
+        fip.setVisible(true);
+    }//GEN-LAST:event_btnIzvestajiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -265,6 +293,7 @@ public class FormaPacijenti extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnIzmeni;
+    private javax.swing.JButton btnIzvestaji;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnPretrazi;
     private javax.swing.JLabel jLabel2;

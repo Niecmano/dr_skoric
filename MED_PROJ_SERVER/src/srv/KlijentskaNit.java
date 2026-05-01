@@ -67,7 +67,7 @@ public class KlijentskaNit extends Thread {
                         break;
                     case FILTER_IZVESTAJA:
                         ZakazanTermin z = (ZakazanTermin) req.getArgum();
-                        Izvestaj i = new Izvestaj(z.getPac(),z.getLekar(), null, null, null, null, null, null, null);
+                        Izvestaj i = new Izvestaj(z.getPac(),z.getLekar(), null, null, null, null, null, null);
                         o = new Odgovor(dbb.select(i, true),null);
                         break;
                     case VRATI_IZVESTAJE:
