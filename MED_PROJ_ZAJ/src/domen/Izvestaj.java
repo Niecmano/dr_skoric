@@ -133,11 +133,10 @@ public class Izvestaj extends OpstiDomenskiObjekat {
                 + lekar.getSifraLekara()+",'"+anamneza+"','"+dg+"','"+terapija+"','"+nalaz+"','"+kontrola+"'";
     }
 
-    //"sifraPac="+pac.getSifraPac()+
     
     @Override
     public String azuriranje() {
-        return "sifraLekara="+lekar.getSifraLekara()+",anamneza='"+anamneza+"',dg='"+dg+"',terapija='"+terapija+"',nalaz='"+nalaz+"',kontrola='"+kontrola+
+        return "sifraPac="+pac.getSifraPac()+",sifraLekara="+lekar.getSifraLekara()+",anamneza='"+anamneza+"',dg='"+dg+"',terapija='"+terapija+"',nalaz='"+nalaz+"',kontrola='"+kontrola+
                 "' WHERE datumVreme='"+datumVreme+"'";
     }
 

@@ -34,12 +34,20 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
         initComponents();
         this.i = i;
         popuniComboLekari();
+        tfPacijent = new AutocompleteTextField(Kontroler.getInstance().vratiPacijente(), 20);
+        tfPacijent.setFont(new Font("Arial", Font.PLAIN, 20));
+
+        panelPacijent.removeAll();
+        panelPacijent.setLayout(new BorderLayout());
+        panelPacijent.add(tfPacijent, BorderLayout.CENTER);
+        panelPacijent.revalidate();
+        panelPacijent.repaint();
+
         if (i.getPac() != null) {
             DateTimeFormatter f = DateTimeFormatter.ofPattern("dd.MM.yyyy");
             lblDatum.setText(lblDatum.getText() + " " + i.getDatumVreme().toLocalDate().format(f));
-            lblPac1.setText(lblPac1.getText() + i.getPac());
             cmbLekari1.setSelectedItem(i.getLekar());
-            
+            tfPacijent.setText(i.getPac().getImePrez());
             taAnamneza.setText(i.getAnamneza());
             taDijagnoza.setText(i.getDg());
             taTerapija.setText(i.getTerapija());
@@ -47,23 +55,10 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
             taKontrola.setText(i.getKontrola());
 
             btnDodaj.setVisible(false);
-            panelPacijent.setVisible(false);
-            
         } else {
-            tfPacijent = new AutocompleteTextField(Kontroler.getInstance().vratiPacijente(), 20);
-            tfPacijent.setFont(new Font("Arial", Font.PLAIN, 20));
-
-            panelPacijent.removeAll();
-            panelPacijent.setLayout(new BorderLayout());
-            panelPacijent.add(tfPacijent, BorderLayout.CENTER);
-
-            panelPacijent.revalidate();
-            panelPacijent.repaint();
-
             btnIzmeni.setVisible(false);
             lblDatum.setVisible(false);
         }
-
     }
 
     /**
@@ -306,6 +301,15 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniActionPerformed
+        if (tfPacijent.getSelectedPacijent() != null) {
+            i.setPac(tfPacijent.getSelectedPacijent());
+        } else {
+            Pacijent neu = new Pacijent(0, tfPacijent.getText(), LocalDate.MIN, "0");
+            neu.setSifraPac((int) Kontroler.getInstance().dodajPacijent(neu));
+            System.out.println(neu.getSifraPac()); // ispise se kako treba, ne bude 0
+            i.setPac(neu);
+            System.out.println(i.getPac().getSifraPac());
+        }
         i.setLekar((Lekar) cmbLekari1.getSelectedItem());
         i.setAnamneza(taAnamneza.getText());
         i.setDg(taDijagnoza.getText());
@@ -319,8 +323,9 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
 
-        if(tfPacijent.getSelectedPacijent()!=null) i.setPac(tfPacijent.getSelectedPacijent());
-        else{
+        if (tfPacijent.getSelectedPacijent() != null) {
+            i.setPac(tfPacijent.getSelectedPacijent());
+        } else {
             Pacijent neu = new Pacijent(0, tfPacijent.getText(), LocalDate.MIN, "0");
             neu.setSifraPac((int) Kontroler.getInstance().dodajPacijent(neu));
             System.out.println(neu.getSifraPac()); // ispise se kako treba, ne bude 0
@@ -334,7 +339,7 @@ public class FormaPrikazIzvestaja extends javax.swing.JFrame {
         i.setTerapija(taTerapija.getText());
         i.setNalaz(taNalaz.getText());
         i.setKontrola(taKontrola.getText());
-        System.out.println("Id pac izv:"+i.getPac().getSifraPac());
+        System.out.println("Id pac izv:" + i.getPac().getSifraPac());
         Kontroler.getInstance().dodajIzvestaj(i);
         PdfGenerator.exportIzvestaj(i);
         this.dispose();

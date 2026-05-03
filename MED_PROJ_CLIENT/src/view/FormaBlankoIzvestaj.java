@@ -21,43 +21,40 @@ import kontr.PdfGenerator;
  * @author darko
  */
 public class FormaBlankoIzvestaj extends javax.swing.JFrame {
+
     private AutocompleteTextField tfPacijent;
     private Izvestaj i;
+
     /**
      * Creates new form FormaBlankoIzvestaj
      */
     public FormaBlankoIzvestaj(Izvestaj i) {
         initComponents();
-                this.i = i;
+        this.i = i;
         popuniComboLekari();
+        tfPacijent = new AutocompleteTextField(Kontroler.getInstance().vratiPacijente(), 20);
+        tfPacijent.setFont(new Font("Arial", Font.PLAIN, 20));
+
+        panelPacijent.removeAll();
+        panelPacijent.setLayout(new BorderLayout());
+        panelPacijent.add(tfPacijent, BorderLayout.CENTER);
+
+        panelPacijent.revalidate();
+        panelPacijent.repaint();
         if (i.getPac() != null) {
             DateTimeFormatter f = DateTimeFormatter.ofPattern("dd.MM.yyyy");
             lblDatum.setText(lblDatum.getText() + " " + i.getDatumVreme().toLocalDate().format(f));
-            lblPac1.setText(lblPac1.getText() + i.getPac());
+            tfPacijent.setText(i.getPac().getImePrez());
             cmbLekari1.setSelectedItem(i.getLekar());
-            
             taIzvestaj.setText(i.getAnamneza());
 
             btnDodaj.setVisible(false);
-            panelPacijent.setVisible(false);
-            
         } else {
-            tfPacijent = new AutocompleteTextField(Kontroler.getInstance().vratiPacijente(), 20);
-            tfPacijent.setFont(new Font("Arial", Font.PLAIN, 20));
-
-            panelPacijent.removeAll();
-            panelPacijent.setLayout(new BorderLayout());
-            panelPacijent.add(tfPacijent, BorderLayout.CENTER);
-
-            panelPacijent.revalidate();
-            panelPacijent.repaint();
-
             btnIzmeni.setVisible(false);
             lblDatum.setVisible(false);
         }
 
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -204,8 +201,9 @@ public class FormaBlankoIzvestaj extends javax.swing.JFrame {
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
 
-        if(tfPacijent.getSelectedPacijent()!=null) i.setPac(tfPacijent.getSelectedPacijent());
-        else{
+        if (tfPacijent.getSelectedPacijent() != null) {
+            i.setPac(tfPacijent.getSelectedPacijent());
+        } else {
             Pacijent neu = new Pacijent(0, tfPacijent.getText(), LocalDate.MIN, "0");
             neu.setSifraPac((int) Kontroler.getInstance().dodajPacijent(neu));
             i.setPac(neu);
@@ -220,13 +218,20 @@ public class FormaBlankoIzvestaj extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniActionPerformed
+        if (tfPacijent.getSelectedPacijent() != null) {
+            i.setPac(tfPacijent.getSelectedPacijent());
+        } else {
+            Pacijent neu = new Pacijent(0, tfPacijent.getText(), LocalDate.MIN, "0");
+            neu.setSifraPac((int) Kontroler.getInstance().dodajPacijent(neu));
+            i.setPac(neu);
+            System.out.println(i.getPac().getSifraPac());
+        }
         i.setLekar((Lekar) cmbLekari1.getSelectedItem());
         i.setAnamneza(taIzvestaj.getText());
         Kontroler.getInstance().izmeniIzvestaj(i);
         PdfGenerator.exportIzvestaj(i);
         this.dispose();
     }//GEN-LAST:event_btnIzmeniActionPerformed
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -247,5 +252,5 @@ public class FormaBlankoIzvestaj extends javax.swing.JFrame {
         for (Lekar l : ls) {
             cmbLekari1.addItem(l);
         }
-}
+    }
 }
